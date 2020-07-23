@@ -1,0 +1,44 @@
+package com.zdinit.icecream.config;
+
+
+import com.zdinit.icecream.common.BaseResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * 全局统一错误处理
+ */
+@Slf4j
+@ControllerAdvice
+public class GlobalExceptionHandler {
+//    非restAPI 类型的指向
+//    public static final String DEFAULT_ERROR_VIEW ="error";
+//    @ExceptionHandler(value = Exception.class)
+//    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e){
+//        ModelAndView mav = new ModelAndView();
+//        mav.addObject("exception", e);
+//        mav.addObject("url", req.getRequestURL());
+//        mav.setViewName(DEFAULT_ERROR_VIEW);
+//        return mav;
+//    }
+
+    /**
+     * 统一的restAPI 500返回
+     * @param req
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = Exception.class)
+    @ResponseBody
+    public BaseResponse<String> defaultErrorHandler(HttpServletRequest req, Exception e){
+        log.info(e.getMessage());
+        BaseResponse baseResponse = new BaseResponse(BaseResponse.errorCode,BaseResponse.errorMsg,null);
+        return baseResponse;
+    }
+
+
+}
