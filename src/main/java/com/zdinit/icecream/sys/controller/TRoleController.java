@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author zd
- * @since 2020-09-02
+ * @since 2020-09-01
  */
 @RestController
-@RequestMapping("/sys/t-dictionary")
-public class TDictionaryController {
+@RequestMapping("/sys/t-role")
+public class TRoleController {
 
 }

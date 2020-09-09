@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author zd
- * @since 2020-06-09
+ * @since 2020-09-02
  */
 public interface ITDictionaryService extends IService<TDictionary> {
 

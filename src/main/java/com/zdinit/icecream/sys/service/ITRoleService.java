@@ -1,6 +1,6 @@
 package com.zdinit.icecream.sys.service;
 
-import com.zdinit.icecream.sys.entity.User;
+import com.zdinit.icecream.sys.entity.TRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author zd
- * @since 2020-06-09
+ * @since 2020-09-01
  */
-public interface IUserService extends IService<User> {
-    void testNew();
+public interface ITRoleService extends IService<TRole> {
+
 }

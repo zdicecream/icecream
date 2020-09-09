@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author zd
- * @since 2020-06-09
+ * @since 2020-09-01
  */
 @RestController
-@RequestMapping("/sys/t-menu")
-public class TMenuController {
+@RequestMapping("/sys/t-resource")
+public class TResourceController {
 
 }

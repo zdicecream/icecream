@@ -3,6 +3,7 @@ package com.zdinit.icecream.sys.entity;
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;
@@ -14,16 +15,16 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author zd
- * @since 2020-09-02
+ * @since 2020-09-01
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class TDictionary extends Model<TDictionary> {
+public class TRole extends Model<TRole> {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * ??
+     * ??ID
      */
     @TableId("ID")
     private String id;
@@ -31,29 +32,44 @@ public class TDictionary extends Model<TDictionary> {
     /**
      * ????
      */
-    @TableField("D_CODE")
-    private String dCode;
+    @TableField("R_NAME")
+    private String rName;
 
     /**
      * ????
      */
-    @TableField("D_CODENAME")
-    private String dCodename;
+    @TableField("R_DESC")
+    private String rDesc;
+
+    /**
+     * ??????
+     */
+    @TableField("R_TIME")
+    private LocalDateTime rTime;
 
     /**
      * ????
      */
-    @TableField("D_SHORTNAME")
-    private String dShortname;
+    @TableField("R_SCOPE")
+    private String rScope;
 
     /**
-     * ???
+     * ????
      */
-    @TableField("D_PARENTCODE")
-    private String dParentcode;
+    @TableField("R_AMOUNT")
+    private BigDecimal rAmount;
 
-    @TableField("D_LEVEL")
-    private BigDecimal dLevel;
+    /**
+     * ??????
+     */
+    @TableField("R_PRODUCT_TYPE")
+    private String rProductType;
+
+    /**
+     * 角色编号
+     */
+    @TableField("R_CODE")
+    private String rCode;
 
 
     @Override

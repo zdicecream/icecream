@@ -1348,5 +1348,15 @@ public class RedisUtil {
      */
     public Cursor<TypedTuple<String>> zScan(String key, ScanOptions options) {
         return redisTemplate.opsForZSet().scan(key, options);
+
+    }
+
+    /**
+     *
+     * @param channel
+     * @param msg
+     */
+    public void Publish(String channel,String msg){
+        redisTemplate.convertAndSend(channel,msg);
     }
 }

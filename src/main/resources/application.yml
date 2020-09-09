@@ -9,11 +9,6 @@ spring:
   profiles:
     # 默认使用开发环境
     active: dev
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT
-    username: root
-    password: root
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 5

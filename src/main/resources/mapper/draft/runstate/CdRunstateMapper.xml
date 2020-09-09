@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdinit.icecream.draft.runstate.mapper.CdRunstateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zdinit.icecream.draft.runstate.entity.CdRunstate">
+        <id column="ID" property="id" />
+        <result column="RS_BANKNAME" property="rsBankname" />
+        <result column="RS_APID" property="rsApid" />
+        <result column="RS_APNAME" property="rsApname" />
+        <result column="RS_LOGONSTATE" property="rsLogonstate" />
+        <result column="RS_OLDPWD" property="rsOldpwd" />
+        <result column="RS_NEWPWD" property="rsNewpwd" />
+        <result column="RS_ORGNLSYSDT" property="rsOrgnlsysdt" />
+        <result column="RS_ORGNLSYSSTS" property="rsOrgnlsyssts" />
+        <result column="RS_CURDATE" property="rsCurdate" />
+        <result column="RS_SYSSTATE" property="rsSysstate" />
+        <result column="RS_NEXTDATE" property="rsNextdate" />
+        <result column="RS_BIZREFTM" property="rsBizreftm" />
+        <result column="RS_RMRK" property="rsRmrk" />
+        <result column="RS_CRLFILE" property="rsCrlfile" />
+        <result column="RS_CRLLASTUPDATETIME" property="rsCrllastupdatetime" />
+        <result column="RS_PRCMSG" property="rsPrcmsg" />
+        <result column="RS_PRCCD" property="rsPrccd" />
+        <result column="RS_BANKCODE" property="rsBankcode" />
+        <result column="RS_PFXPATH" property="rsPfxpath" />
+        <result column="RS_PFXPASSWORD" property="rsPfxpassword" />
+        <result column="RS_CRLPATH" property="rsCrlpath" />
+        <result column="RS_STTLMONLINEMRK" property="rsSttlmonlinemrk" />
+        <result column="RS_STTLMONLINERMRK" property="rsSttlmonlinermrk" />
+        <result column="RS_HVPSNXTSYSDT" property="rsHvpsnxtsysdt" />
+        <result column="RS_NPCCODE" property="rsNpccode" />
+        <result column="RS_PFXFILENAME" property="rsPfxfilename" />
+        <result column="RS_UNIFYKEY" property="rsUnifykey" />
+        <result column="RS_NPCSTATUS" property="rsNpcstatus" />
+        <result column="RS_CCPCCODE" property="rsCcpccode" />
+        <result column="RS_CCPCSTATUS" property="rsCcpcstatus" />
+        <result column="RS_SYSPARTNER" property="rsSyspartner" />
+        <result column="RS_OPERSWITCH" property="rsOperswitch" />
+        <result column="RS_SWITCHTYPE" property="rsSwitchtype" />
+        <result column="CD_REGION" property="cdRegion" />
+        <result column="CD_BANKCODETYPE" property="cdBankcodetype" />
+        <result column="WORK_DATE" property="workDate" />
+        <result column="SYSTEM_STITCH" property="systemStitch" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, RS_BANKNAME, RS_APID, RS_APNAME, RS_LOGONSTATE, RS_OLDPWD, RS_NEWPWD, RS_ORGNLSYSDT, RS_ORGNLSYSSTS, RS_CURDATE, RS_SYSSTATE, RS_NEXTDATE, RS_BIZREFTM, RS_RMRK, RS_CRLFILE, RS_CRLLASTUPDATETIME, RS_PRCMSG, RS_PRCCD, RS_BANKCODE, RS_PFXPATH, RS_PFXPASSWORD, RS_CRLPATH, RS_STTLMONLINEMRK, RS_STTLMONLINERMRK, RS_HVPSNXTSYSDT, RS_NPCCODE, RS_PFXFILENAME, RS_UNIFYKEY, RS_NPCSTATUS, RS_CCPCCODE, RS_CCPCSTATUS, RS_SYSPARTNER, RS_OPERSWITCH, RS_SWITCHTYPE, CD_REGION, CD_BANKCODETYPE, WORK_DATE, SYSTEM_STITCH
+    </sql>
+
+</mapper>

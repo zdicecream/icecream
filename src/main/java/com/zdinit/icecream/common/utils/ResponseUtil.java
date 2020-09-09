@@ -21,4 +21,8 @@ public class ResponseUtil {
         baseResponse.setMsg(msg);
         return baseResponse;
     }
+
+    public static BaseResponse error(){
+        return error(BaseResponse.errorCode,BaseResponse.successMsg);
+    }
 }

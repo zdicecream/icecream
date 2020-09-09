@@ -4,17 +4,17 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.zdinit.icecream.sys.entity.TDictionary">
-        <id column="id" property="id" />
-        <result column="d_code" property="dCode" />
-        <result column="d_codename" property="dCodename" />
-        <result column="d_shortname" property="dShortname" />
-        <result column="d_parentcode" property="dParentcode" />
-        <result column="d_level" property="dLevel" />
+        <id column="ID" property="id" />
+        <result column="D_CODE" property="dCode" />
+        <result column="D_CODENAME" property="dCodename" />
+        <result column="D_SHORTNAME" property="dShortname" />
+        <result column="D_PARENTCODE" property="dParentcode" />
+        <result column="D_LEVEL" property="dLevel" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, d_code, d_codename, d_shortname, d_parentcode, d_level
+        ID, D_CODE, D_CODENAME, D_SHORTNAME, D_PARENTCODE, D_LEVEL
     </sql>
 
 </mapper>

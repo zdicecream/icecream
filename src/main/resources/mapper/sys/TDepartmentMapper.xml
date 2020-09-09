@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdinit.icecream.sys.mapper.TDepartmentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zdinit.icecream.sys.entity.TDepartment">
+        <id column="ID" property="id" />
+        <result column="D_CODE" property="dCode" />
+        <result column="D_NAME" property="dName" />
+        <result column="D_DESC" property="dDesc" />
+        <result column="D_ORDER" property="dOrder" />
+        <result column="D_PID" property="dPid" />
+        <result column="D_STATUS" property="dStatus" />
+        <result column="D_LEVEL" property="dLevel" />
+        <result column="D_TREECODE" property="dTreecode" />
+        <result column="D_ISORG" property="dIsorg" />
+        <result column="D_BANKNUMBER" property="dBanknumber" />
+        <result column="D_ORGCODE" property="dOrgcode" />
+        <result column="D_INNERBANKCODE" property="dInnerbankcode" />
+        <result column="D_AUDITBANKCODE" property="dAuditbankcode" />
+        <result column="IS_BRANCH" property="isBranch" />
+        <result column="D_STOCKDEPT" property="dStockdept" />
+        <result column="ADDRESS" property="address" />
+        <result column="ACPTDEPT" property="acptdept" />
+        <result column="D_DISCOUNTDTOCKDEPT" property="dDiscountdtockdept" />
+        <result column="COLLECTIONACCOUNT" property="collectionaccount" />
+        <result column="AREACODE" property="areacode" />
+        <result column="LEVEL_CODE" property="levelCode" />
+        <result column="MAINBRA_FLG" property="mainbraFlg" />
+        <result column="PJS_BRCH_NO" property="pjsBrchNo" />
+        <result column="PJS_USER_NO" property="pjsUserNo" />
+        <result column="PJS_USER_NAME" property="pjsUserName" />
+        <result column="DEPART_SOCIAL_CODE" property="departSocialCode" />
+        <result column="PJS_DEPART_NAME" property="pjsDepartName" />
+        <result column="PJS_ROLE" property="pjsRole" />
+        <result column="PJS_MEMBER_CODE" property="pjsMemberCode" />
+        <result column="CPR_BRCH_NO" property="cprBrchNo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, D_CODE, D_NAME, D_DESC, D_ORDER, D_PID, D_STATUS, D_LEVEL, D_TREECODE, D_ISORG, D_BANKNUMBER, D_ORGCODE, D_INNERBANKCODE, D_AUDITBANKCODE, IS_BRANCH, D_STOCKDEPT, ADDRESS, ACPTDEPT, D_DISCOUNTDTOCKDEPT, COLLECTIONACCOUNT, AREACODE, LEVEL_CODE, MAINBRA_FLG, PJS_BRCH_NO, PJS_USER_NO, PJS_USER_NAME, DEPART_SOCIAL_CODE, PJS_DEPART_NAME, PJS_ROLE, PJS_MEMBER_CODE, CPR_BRCH_NO
+    </sql>
+
+</mapper>

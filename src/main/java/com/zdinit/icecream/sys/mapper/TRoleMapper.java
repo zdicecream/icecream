@@ -1,6 +1,6 @@
 package com.zdinit.icecream.sys.mapper;
 
-import com.zdinit.icecream.sys.entity.User;
+import com.zdinit.icecream.sys.entity.TRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author zd
- * @since 2020-06-09
+ * @since 2020-09-01
  */
-public interface UserMapper extends BaseMapper<User> {
-    void test();
+public interface TRoleMapper extends BaseMapper<TRole> {
+
 }

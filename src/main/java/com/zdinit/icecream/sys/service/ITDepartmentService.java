@@ -1,6 +1,6 @@
 package com.zdinit.icecream.sys.service;
 
-import com.zdinit.icecream.sys.entity.Perple;
+import com.zdinit.icecream.sys.entity.TDepartment;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author zd
- * @since 2020-06-09
+ * @since 2020-09-01
  */
-public interface IPerpleService extends IService<Perple> {
+public interface ITDepartmentService extends IService<TDepartment> {
 
 }

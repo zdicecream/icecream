@@ -1,6 +1,6 @@
 package com.zdinit.icecream.sys.mapper;
 
-import com.zdinit.icecream.sys.entity.TMenu;
+import com.zdinit.icecream.sys.entity.TUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author zd
- * @since 2020-06-09
+ * @since 2020-09-01
  */
-public interface TMenuMapper extends BaseMapper<TMenu> {
+public interface TUserMapper extends BaseMapper<TUser> {
 
 }
