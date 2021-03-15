@@ -2,9 +2,10 @@ package com.zdinit.icecream.draft.runstate.entity;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -65,7 +66,7 @@ public class CdRunstate extends Model<CdRunstate> {
      * ?????
      */
     @TableField("RS_ORGNLSYSDT")
-    private LocalDateTime rsOrgnlsysdt;
+    private Date rsOrgnlsysdt;
 
     /**
      * ?????
@@ -77,7 +78,7 @@ public class CdRunstate extends Model<CdRunstate> {
      * ??????
      */
     @TableField("RS_CURDATE")
-    private LocalDateTime rsCurdate;
+    private Date rsCurdate;
 
     /**
      * ??????
@@ -89,7 +90,7 @@ public class CdRunstate extends Model<CdRunstate> {
      * ????????
      */
     @TableField("RS_NEXTDATE")
-    private LocalDateTime rsNextdate;
+    private Date rsNextdate;
 
     /**
      * ??????
@@ -113,7 +114,7 @@ public class CdRunstate extends Model<CdRunstate> {
      * ??????
      */
     @TableField("RS_CRLLASTUPDATETIME")
-    private LocalDateTime rsCrllastupdatetime;
+    private Date rsCrllastupdatetime;
 
     /**
      * ????????
@@ -167,7 +168,7 @@ public class CdRunstate extends Model<CdRunstate> {
      * ????????? 
      */
     @TableField("RS_HVPSNXTSYSDT")
-    private LocalDateTime rsHvpsnxtsysdt;
+    private Date rsHvpsnxtsysdt;
 
     /**
      * ??NPC??
@@ -220,23 +221,13 @@ public class CdRunstate extends Model<CdRunstate> {
     @TableField("RS_SWITCHTYPE")
     private String rsSwitchtype;
 
-    /**
-     * ??????
-     */
-    @TableField("CD_REGION")
-    private String cdRegion;
 
-    /**
-     * ??????
-     */
-    @TableField("CD_BANKCODETYPE")
-    private String cdBankcodetype;
 
-    @TableField("WORK_DATE")
-    private LocalDateTime workDate;
 
-    @TableField("SYSTEM_STITCH")
-    private String systemStitch;
+
+    @TableField("RS_WORKDATE")
+    private Date workDate;
+
 
 
     @Override

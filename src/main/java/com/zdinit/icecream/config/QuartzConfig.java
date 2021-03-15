@@ -3,9 +3,13 @@ package com.zdinit.icecream.config;
 
 import com.zdinit.icecream.common.task.WeCatTask;
 import org.quartz.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
+import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
 /**
  * 整合Quartz ，默认多线程执行
@@ -25,6 +29,8 @@ public class QuartzConfig {
 
     /* 触发器 */
     private static final String TRIGGER = "MsgGroup";
+    @Autowired
+    private ApplicationContext applicationContext;
 
     /**
      * SimpleSchedule  每隔一段时间运行, 好像不能同时用，弃用
@@ -48,21 +54,29 @@ public class QuartzConfig {
     public void scheduleJobs() throws SchedulerException {
         Scheduler scheduler = scheduler();
         JobDetail jobDetail = JobBuilder.newJob(WeCatTask.class).withIdentity(WECAT_TASK,MSG_GROUP).build();
-        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0 0 18 * * ?");
+        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0 0/5 16-18 * * ? *");
         CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(TRIGGER,MSG_GROUP).withSchedule(cronScheduleBuilder).build();
         scheduler.scheduleJob(jobDetail,cronTrigger);
     }
     @Bean
-    public SchedulerFactoryBean schedulerFactoryBean(){
+    @ConditionalOnMissingBean
+    public SchedulerFactoryBean schedulerFactoryBean(ApplicationContext applicationContext){
         SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
         schedulerFactoryBean.setOverwriteExistingJobs(true);//覆盖已存在的任务
         schedulerFactoryBean.setStartupDelay(60);//延时60秒启动定时任务，避免系统未完全启动却开始执行定时任务的情况
+
+        /**
+         * 解决Quartz中无法注入bean问题，原因 Quartz和spring分开实例化自己的类，需要将Quartz交给spring管理
+         */
+        SpringBeanJobFactory springBeanJobFactory = new SpringBeanJobFactory();
+        springBeanJobFactory.setApplicationContext(applicationContext);
+        schedulerFactoryBean.setJobFactory(springBeanJobFactory);
         return schedulerFactoryBean;
     }
 
     // 创建schedule
     @Bean(name = "scheduler")
     public Scheduler scheduler() {
-        return schedulerFactoryBean().getScheduler();
+        return schedulerFactoryBean(applicationContext).getScheduler();
     }
 }

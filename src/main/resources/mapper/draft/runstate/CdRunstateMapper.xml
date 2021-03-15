@@ -38,10 +38,7 @@
         <result column="RS_SYSPARTNER" property="rsSyspartner" />
         <result column="RS_OPERSWITCH" property="rsOperswitch" />
         <result column="RS_SWITCHTYPE" property="rsSwitchtype" />
-        <result column="CD_REGION" property="cdRegion" />
-        <result column="CD_BANKCODETYPE" property="cdBankcodetype" />
         <result column="WORK_DATE" property="workDate" />
-        <result column="SYSTEM_STITCH" property="systemStitch" />
     </resultMap>
 
     <!-- 通用查询结果列 -->

@@ -3,7 +3,6 @@ server:
   port: 8088
   servlet:
     context-path: /api
-
 # DataSource Config
 spring:
   profiles:
@@ -32,7 +31,7 @@ spring:
   #flyway数据库版本管理
   flyway:
     clean-disabled: true #禁用clean操作
-    enabled: true #使flyway生效
+    enabled: false #使flyway生效
     baseline-on-migrate: true #初始化时如果不存在迁移记录表，默认新建一个
     out-of-order: false #防止开发环境下漏掉没来得及apply的文件，产品环境最好设为false
     locations: classpath:/dbScript
@@ -60,4 +59,10 @@ mybatis-plus:
   configuration:
     #输出格式化sql，但是结果也会输出，过于庞大
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+
+
+
 

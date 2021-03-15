@@ -1,18 +1,19 @@
 package com.zdinit.icecream.draft.runstate.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zdinit.icecream.common.BaseResponse;
 import com.zdinit.icecream.common.utils.RedisUtil;
 import com.zdinit.icecream.common.utils.ResponseUtil;
+import com.zdinit.icecream.draft.runstate.entity.CdRunstate;
 import com.zdinit.icecream.draft.runstate.service.ICdRunstateService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,15 +26,77 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/draft/cd-runstate")
+@Slf4j
 public class CdRunstateController {
 
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired
+    private ICdRunstateService runstateService;
 
     @RequestMapping(value = "/getRunstate", method = RequestMethod.GET)
     public BaseResponse getRunstate() throws Exception {
         Map<String, String> map = new HashMap<>();
         map.put("bankname", redisUtil.get("bankname"));
         return ResponseUtil.sucess(map);
+    }
+
+    /**
+     * 无参数
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getRunstate1", method = RequestMethod.GET)
+    public BaseResponse getRunstate1() throws Exception {
+        List<CdRunstate> cdRunstateList = runstateService.list();
+        return ResponseUtil.sucess(cdRunstateList);
+    }
+
+    /**
+     * 有参数，且为json格式的，用@RequestBody接收
+     * @param cdRunstate
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/addRunstate", method = RequestMethod.POST)
+    public BaseResponse addRunstate(@RequestBody CdRunstate cdRunstate) throws Exception {
+
+        cdRunstate.setWorkDate(new Date());
+        runstateService.save(cdRunstate);
+        return ResponseUtil.sucess();
+    }
+
+    /**
+     * 有参数，且为 id=id形式用@RequestParam
+     * @param cdRunstateList
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/delRunstate", method = RequestMethod.POST)
+    public BaseResponse delRunstate(@RequestParam List<String> cdRunstateList) throws Exception {
+        runstateService.removeByIds(cdRunstateList);
+        return ResponseUtil.sucess();
+    }
+
+    @RequestMapping(value = "/updateRunstate", method = RequestMethod.POST)
+    public BaseResponse updateRunstate(@RequestBody CdRunstate cdRunstate) throws Exception {
+        CdRunstate cdRunstateCur = runstateService.getById(cdRunstate.getId());
+        if (cdRunstateCur != null) {
+            cdRunstateCur.setWorkDate(new Date());
+            runstateService.updateById(cdRunstateCur);
+        }
+        return ResponseUtil.sucess();
+    }
+
+    /**
+     * Page参数
+     * @param page
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getRunstatePage", method = RequestMethod.GET)
+    public BaseResponse getRunstatePage(@RequestBody Page page) throws Exception {
+        Page<CdRunstate> cdRunstateList = runstateService.page(page);
+        return ResponseUtil.sucess(cdRunstateList);
     }
 }

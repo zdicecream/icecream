@@ -10,13 +10,13 @@ import java.sql.SQLException;
 
 @SpringBootTest
 class SpringBootDataApplicationTests {
-    @Autowired
-    DataSource dataSource;
+//    @Autowired
+//    DataSource dataSource;
     @Test
     void contextLoads() throws SQLException {
-        Connection connection = dataSource.getConnection();
-        //查看数据源
-        System.out.println(connection.getClass());
+//        Connection connection = dataSource.getConnection();
+//        //查看数据源
+//        System.out.println(connection.getClass());
     }
 
 }

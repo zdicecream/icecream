@@ -6,24 +6,22 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicLong;
 /**
- * 自定义ID生成器,暂时不开启
+ * 自定义ID生成器,mp默认是雪河算法，可以不开启
  */
 @Slf4j
-//@Component
+@Component
 public class IdGenerator implements IdentifierGenerator {
-    private final AtomicLong al = new AtomicLong(1);
 
     @Override
     public Long nextId(Object entity) {
         //可以将当前传入的class全类名来作为bizKey,或者提取参数来生成bizKey进行分布式Id调用生成.
         String bizKey = entity.getClass().getName();
-        log.info("bizKey:{}", bizKey);
-        MetaObject metaObject = SystemMetaObject.forObject(entity);
-        String name = (String) metaObject.getValue("name");
-        final long id = al.getAndAdd(1);
-        log.info("为{}生成主键值->:{}", name, id);
+        log.debug("bizKey:{}", bizKey);
+        final long id = Long.parseLong(LocalDateTime.now().toString());
+        log.debug("为生成主键值->:{}", id);
         return id;
     }
 
