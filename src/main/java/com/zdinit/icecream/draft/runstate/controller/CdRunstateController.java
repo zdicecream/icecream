@@ -62,7 +62,9 @@ public class CdRunstateController {
     public BaseResponse addRunstate(@RequestBody CdRunstate cdRunstate) throws Exception {
 
         cdRunstate.setWorkDate(new Date());
+        cdRunstate.setRsApid("123");
         runstateService.save(cdRunstate);
+        runstateService.testTran(cdRunstate);
         return ResponseUtil.sucess();
     }
 

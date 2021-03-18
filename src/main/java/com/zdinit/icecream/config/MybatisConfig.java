@@ -5,13 +5,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParser
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 //Mybatisplus 分页插件
-@EnableTransactionManagement
+@EnableTransactionManagement  //开启事务
 @Configuration
-@MapperScan("com.zdinit.icecream.*.mapper")
+@MapperScan("com.zdinit.icecream.**.mapper")
 public class MybatisConfig {
     @Bean
     public PaginationInterceptor paginationInterceptor() {
