@@ -9,7 +9,11 @@ import com.zdinit.icecream.draft.runstate.entity.CdRunstate;
 import com.zdinit.icecream.draft.runstate.service.ICdRunstateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -100,5 +104,12 @@ public class CdRunstateController {
     public BaseResponse getRunstatePage(@RequestBody Page page) throws Exception {
         Page<CdRunstate> cdRunstateList = runstateService.page(page);
         return ResponseUtil.sucess(cdRunstateList);
+    }
+
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public BaseResponse test() throws Exception {
+
+        return ResponseUtil.sucess();
     }
 }

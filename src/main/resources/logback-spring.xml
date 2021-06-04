@@ -55,8 +55,8 @@
     <!--而这个logger里没配置appender，所以得交给root打印-->
     <!--所以com.lpc包里的日志从TRACE级别开始-->
     <!--其他包里的日志根据root的配置从INFO级别开始打印-->
-    <logger name="com.lpc" level="TRACE" additivity="true">
-    </logger>
+    <!--<logger name="com.lpc" level="TRACE" additivity="true">
+    </logger>-->
 
     <root level="INFO">
         <appender-ref ref="console"/>
