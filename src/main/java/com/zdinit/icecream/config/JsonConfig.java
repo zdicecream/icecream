@@ -1,6 +1,8 @@
 package com.zdinit.icecream.config;
 
+import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.serializer.ToStringSerializer;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.springframework.context.annotation.Configuration;
@@ -48,6 +50,17 @@ public class JsonConfig implements WebMvcConfigurer {
                 SerializerFeature.WriteDateUseDateFormat,
                 SerializerFeature.DisableCircularReferenceDetect    // 禁用循环引用
         );
+
+
+        /**
+         * 序列换成json时,将所有的long变成string
+         * 因为js中得数字类型不能包含所有的java long值
+         */
+        SerializeConfig serializeConfig = SerializeConfig.globalInstance;
+        serializeConfig.put(Long.class , ToStringSerializer.instance);
+        serializeConfig.put(Long.TYPE , ToStringSerializer.instance);
+        config.setSerializeConfig(serializeConfig);
+
         fastJsonHttpMessageConverter.setFastJsonConfig(config);
 
         // 添加支持的MediaTypes;不添加时默认为*/*,也就是默认支持全部
