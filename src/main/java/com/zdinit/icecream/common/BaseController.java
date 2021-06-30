@@ -40,7 +40,7 @@ public abstract class BaseController {
             OrderItem orderItem = null;
             for (int i=0;i<sortField.length;i++) {
                 orderItem = new OrderItem();
-                orderItem.setColumn(sortField[i]);
+                orderItem.setColumn(camelToUnderline(sortField[i],1));
                 if (sortOrder!=null &&"ascend".equals(sortOrder[i])) {
                     orderItem.setAsc(true);
                 }else {
@@ -55,4 +55,27 @@ public abstract class BaseController {
         return page;
     }
 
+
+    //驼峰转下划线
+    private static String camelToUnderline(String param, Integer charType) {
+        if (param == null || "".equals(param.trim())) {
+            return "";
+        }
+        int len = param.length();
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++) {
+            char c = param.charAt(i);
+            if (Character.isUpperCase(c)) {
+                sb.append('_');
+            }
+            if (charType == 2) {
+                sb.append(Character.toUpperCase(c));  //统一都转大写
+            } else {
+                sb.append(Character.toLowerCase(c));  //统一都转小写
+            }
+
+
+        }
+        return sb.toString();
+    }
 }

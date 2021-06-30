@@ -1,8 +1,11 @@
 package com.zdinit.icecream.sys.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.io.Serializable;
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,7 +15,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author zd
- * @since 2021-05-06
+ * @since 2021-06-10
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -23,22 +26,26 @@ public class Resource extends Model<Resource> {
 
     private Long id;
 
-    private String name;
+    private String resourceCode;
+
+    private String resourceName;
 
     private Long pid;
 
-    private Integer order;
-
-    private Integer level;
-
-    private String url;
-
-    private String icon;
+    private Integer orders;
 
     private Integer type;
 
-    private Integer state;
+    private Integer leaf;
 
+    @TableField(exist = false)
+    private Long roleId;
+
+    @TableField(exist = false)
+    private List actionList;
+
+    @TableField(exist = false)
+    private List<Resource> children;
 
     @Override
     protected Serializable pkVal() {

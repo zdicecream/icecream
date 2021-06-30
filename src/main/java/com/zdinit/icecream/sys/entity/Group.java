@@ -23,9 +23,9 @@ public class Group extends Model<Group> {
 
     private Long id;
 
-    private String groupname;
+    private String groupName;
 
-    private String groupcode;
+    private String groupCode;
 
     private Long pid;
 

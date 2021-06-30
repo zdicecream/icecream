@@ -32,7 +32,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public User judge(String name, String password) {
-        return null;
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username",name);
+        return this.getOne(queryWrapper);
     }
 
     @Transactional
@@ -67,7 +69,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             User userAdd = new User();
             userAdd.setUsername(user.getUsername());
             userAdd.setPassword("111111");
-            userAdd.setShowname(user.getUsername());
+            userAdd.setShowName(user.getUsername());
             userAdd.setMobile("021-12345678");
             userAdd.setEmail("5645654@654.com");
             userAdd.setGroupId(2L);
@@ -77,6 +79,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
             user.getRoleList().forEach(roleid -> this.baseMapper.saveRole(userAdd.getId(),Long.parseLong((String) roleid)));
         }
+    }
+
+    @Override
+    @Transactional
+    public void removeUserById(String id) {
+        this.baseMapper.deleRoleByUserId(Long.parseLong(id));
+        this.removeById(id);
+    }
+
+    @Override
+    public List<User> listUserByRoleId(Long id) {
+        return this.baseMapper.listUserByRoleId(id);
     }
 
 }

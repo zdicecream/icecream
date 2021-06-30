@@ -1,8 +1,11 @@
 package com.zdinit.icecream.sys.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.io.Serializable;
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -23,10 +26,12 @@ public class Role extends Model<Role> {
 
     private Long id;
 
-    private String rolename;
+    private String roleName;
 
     private Integer state;
 
+    @TableField(exist = false)
+    private List resourceList;
 
     @Override
     protected Serializable pkVal() {

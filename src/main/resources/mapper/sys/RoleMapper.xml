@@ -5,7 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.zdinit.icecream.sys.entity.Role">
         <id column="id" property="id" />
-        <result column="rolename" property="rolename" />
+        <result column="rolename" property="roleName" />
         <result column="state" property="state" />
     </resultMap>
 
@@ -14,7 +14,7 @@
         id, rolename, state
     </sql>
 
-    <select id="listRoleById" resultType="com.zdinit.icecream.sys.vo.RoleVo">
+    <select id="listRoleByIds" resultType="com.zdinit.icecream.sys.vo.RoleVo">
         select sr.*,sur.userid from sys_role sr left join sys_user_role sur on sur.roleid=sr.id
         where sur.userid in
         <foreach item="item" index="index" collection="list"

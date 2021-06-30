@@ -1,5 +1,6 @@
 package com.zdinit.icecream.sys.mapper;
 
+import com.zdinit.icecream.sys.entity.Resource;
 import com.zdinit.icecream.sys.entity.Role;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zdinit.icecream.sys.vo.RoleVo;
@@ -17,7 +18,8 @@ import java.util.List;
  */
 public interface RoleMapper extends BaseMapper<Role> {
 
-    List<RoleVo> listRoleById(List<Long> list);
+    List<RoleVo> listRoleByIds(List<Long> list);
 
     List<Role> listRoleByUserId(Long id);
+
 }

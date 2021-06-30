@@ -1,6 +1,7 @@
 package com.zdinit.icecream.sys.controller;
 
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.zdinit.icecream.common.BaseController;
 import com.zdinit.icecream.common.BaseResponse;
 import com.zdinit.icecream.common.utils.RedisUtil;
@@ -44,26 +45,20 @@ public class LoginController extends BaseController {
     public BaseResponse login(@RequestParam String name,@RequestParam String password) throws Exception {
 
         User user = userService.judge(name,password);
-        Map map = new HashMap();
         if (user == null) {
-            map.put("login","error");
-            map.put("msg","无此用户");
-            return ResponseUtil.sucess(map);
+            return ResponseUtil.error("无此用户");
         }
         if (!password.equals(user.getPassword())) {
-            map.put("login","error");
-            map.put("msg","密码错误");
-            return ResponseUtil.sucess(map);
+            return ResponseUtil.error("密码错误");
         }
-
-/*        List<Resource> resourceList = resourceService.listResourceByUserId(user.getId());
-        map.put("login","success");
-        map.put("msg","登陆成功");
-        map.put("department",department.getDName());
-        map.put("role",resourceList.size());*/
-        return ResponseUtil.sucess(map);
+        StpUtil.login(user.getId());
+        return ResponseUtil.sucess(StpUtil.getTokenInfo());
     }
 
+    @RequestMapping(value = "/isLogin", method = RequestMethod.POST)
+    public BaseResponse isLogin(@RequestParam String name,@RequestParam String password) throws Exception {
+        return ResponseUtil.sucess("当前会话是否登录：" + StpUtil.isLogin());
+    }
 
     @RequestMapping(value = "/msgSend", method = RequestMethod.POST)
     public BaseResponse msgSend(@RequestParam String channel,@RequestParam String msg) throws Exception {

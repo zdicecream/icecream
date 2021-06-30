@@ -18,4 +18,8 @@ public interface UserMapper extends BaseMapper<User> {
     void saveRole(Long userid, Long roleid);
 
     void deleRole(Long userid, Long roleid);
+
+    void deleRoleByUserId(Long userId);
+
+    List<User> listUserByRoleId(Long id);
 }

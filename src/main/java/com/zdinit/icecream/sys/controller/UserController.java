@@ -51,21 +51,23 @@ public class UserController extends BaseController {
         }
         IPage<User> userList = userService.page(page(),wrapper);
 
-        List<Long> ksyList = new ArrayList<>();
-        userList.getRecords().forEach(user1 -> ksyList.add(user1.getId()));
-        List<RoleVo> roleList = roleService.listRoleByIds(ksyList);
+        if (userList.getTotal()>0) {
+            List<Long> ksyList = new ArrayList<>();
+            userList.getRecords().forEach(user1 -> ksyList.add(user1.getId()));
+            List<RoleVo> roleList = roleService.listRoleByIds(ksyList);
 
-        for (User u:
-             userList.getRecords()) {
-            List<RoleVo> roles = roleList.stream().filter(role -> role.getUserId().equals(u.getId())).collect(Collectors.toList());
-            u.setRoleList(roles);
+            for (User u:
+                    userList.getRecords()) {
+                List<RoleVo> roles = roleList.stream().filter(role -> role.getUserId().equals(u.getId())).collect(Collectors.toList());
+                u.setRoleList(roles);
+            }
         }
         return ResponseUtil.sucess(userList);
     }
 
     @RequestMapping(value = "/delUser", method = RequestMethod.POST)
     public BaseResponse delUser(@RequestParam String id) throws Exception {
-        userService.removeById(id);
+        userService.removeUserById(id);
         return ResponseUtil.sucess(null);
     }
 

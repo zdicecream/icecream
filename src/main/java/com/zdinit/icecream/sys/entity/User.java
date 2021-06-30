@@ -33,7 +33,7 @@ public class User extends Model<User>{
 
     private String password;
 
-    private String showname;
+    private String showName;
 
     private String mobile;
 
@@ -50,7 +50,7 @@ public class User extends Model<User>{
     private Integer state;
 
     @TableField(exist = false)
-    private List RoleList;
+    private List roleList;
     @Override
     protected Serializable pkVal() {
         return this.id;

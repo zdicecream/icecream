@@ -23,6 +23,10 @@ public class ResponseUtil {
     }
 
     public static BaseResponse error(){
-        return error(BaseResponse.errorCode,BaseResponse.successMsg);
+        return error(BaseResponse.errorCode,BaseResponse.errorMsg);
+    }
+
+    public static BaseResponse error(String msg){
+        return error(BaseResponse.errorCode,msg);
     }
 }

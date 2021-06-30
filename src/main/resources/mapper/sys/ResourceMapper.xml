@@ -5,19 +5,49 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.zdinit.icecream.sys.entity.Resource">
         <id column="id" property="id" />
-        <result column="name" property="name" />
+        <result column="resourcename" property="resourceName" />
         <result column="pid" property="pid" />
-        <result column="order" property="order" />
-        <result column="level" property="level" />
-        <result column="url" property="url" />
-        <result column="icon" property="icon" />
+        <result column="orders" property="orders" />
         <result column="type" property="type" />
-        <result column="state" property="state" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, pid, order, level, url, icon, type, state
+        id, resourcename, pid, orders, level, url, icon, type, state
     </sql>
 
+    <select id="listResourceByids" resultType="com.zdinit.icecream.sys.entity.Resource">
+        select sr.*,srr.roleid from sys_resource sr left join sys_role_resource srr on srr.resourceid=sr.id
+        where srr.roleid in
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="listResourceByid" resultType="com.zdinit.icecream.sys.entity.Resource" >
+        select sr.*,srr.roleid from sys_resource sr left join sys_role_resource srr on srr.resourceid=sr.id
+        where srr.roleid = #{id} and sr.type = 2
+    </select>
+
+    <delete id="delResource">
+        delete from sys_role_resource where roleid= #{roleId} and resourceid= #{resourceId}
+    </delete>
+
+    <delete id="delResourceByRoleId">
+        delete from sys_role_resource where roleid= #{roleId}
+    </delete>
+
+    <insert id="addResource">
+        insert into sys_role_resource values (#{roleId},#{resourceId})
+    </insert>
+
+    <select id="listRoleByResourceId" resultType="com.zdinit.icecream.sys.entity.Role">
+        select sr.* from sys_role sr left join sys_role_resource srr on srr.roleid=sr.id
+        where srr.resourceid = #{id}
+    </select>
+
+    <select id="listResourceNameByUserId" resultType="java.lang.String">
+        select sr.resource_code from sys_user_role sur,sys_role_resource srr,sys_resource sr where sur.roleid=srr.roleid and srr.resourceid=sr.id and sur.userid= #{id}
+    </select>
 </mapper>
