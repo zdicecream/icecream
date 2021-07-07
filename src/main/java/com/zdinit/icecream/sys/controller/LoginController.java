@@ -12,10 +12,7 @@ import com.zdinit.icecream.sys.service.IGroupService;
 import com.zdinit.icecream.sys.service.IResourceService;
 import com.zdinit.icecream.sys.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,13 +39,13 @@ public class LoginController extends BaseController {
     private RedisUtil redisUtil;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public BaseResponse login(@RequestParam String name,@RequestParam String password) throws Exception {
+    public BaseResponse login(@RequestBody User userInfo) throws Exception {
 
-        User user = userService.judge(name,password);
+        User user = userService.judge(userInfo.getUsername(),userInfo.getPassword());
         if (user == null) {
             return ResponseUtil.error("无此用户");
         }
-        if (!password.equals(user.getPassword())) {
+        if (!userInfo.getPassword().equals(user.getPassword())) {
             return ResponseUtil.error("密码错误");
         }
         StpUtil.login(user.getId());
@@ -59,6 +56,13 @@ public class LoginController extends BaseController {
     public BaseResponse isLogin(@RequestParam String name,@RequestParam String password) throws Exception {
         return ResponseUtil.sucess("当前会话是否登录：" + StpUtil.isLogin());
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public BaseResponse logout() throws Exception {
+        StpUtil.logout();
+        return ResponseUtil.sucess("已登出");
+    }
+
 
     @RequestMapping(value = "/msgSend", method = RequestMethod.POST)
     public BaseResponse msgSend(@RequestParam String channel,@RequestParam String msg) throws Exception {

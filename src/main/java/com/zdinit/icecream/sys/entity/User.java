@@ -51,6 +51,9 @@ public class User extends Model<User>{
 
     @TableField(exist = false)
     private List roleList;
+
+    @TableField(exist = false)
+    private List resourceList;
     @Override
     protected Serializable pkVal() {
         return this.id;

@@ -21,16 +21,16 @@ public class BaseResponse<T> implements Serializable{
      500    内部错误
      */
 
-    public static final String successCode = "200";
+    public static final Integer successCode = 200;
     public static final String successMsg = "请求成功！";
 
-    public static final String falseCode = "400";
+    public static final Integer falseCode = 400;
     public static final String falseMsg = "无效请求！";
 
-    public static final String errorCode = "500";
+    public static final Integer errorCode = 500;
     public static final String errorMsg = "内部错误！";
 
-    private String code;
+    private Integer code;
     private String msg;
     /*** 返回数据*/
     private T data;
@@ -39,7 +39,7 @@ public class BaseResponse<T> implements Serializable{
 
     }
 
-    public BaseResponse(String code, String msg, T data) {
+    public BaseResponse(Integer code, String msg, T data) {
         this.code = code;
         this.msg = msg;
         this.data = data;

@@ -1,5 +1,7 @@
 package com.zdinit.icecream.sys.service.impl;
 
+import cn.dev33.satoken.secure.SaSecureUtil;
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.zdinit.icecream.sys.entity.Role;
@@ -68,7 +70,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }else {
             User userAdd = new User();
             userAdd.setUsername(user.getUsername());
-            userAdd.setPassword("111111");
+            userAdd.setPassword(SaSecureUtil.md5("111111"));
             userAdd.setShowName(user.getUsername());
             userAdd.setMobile("021-12345678");
             userAdd.setEmail("5645654@654.com");

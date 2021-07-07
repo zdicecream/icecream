@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public BaseResponse<String> NotLoginExceptionhandler(HttpServletRequest req,NotLoginException nle){
         log.info("登录异常",nle);
-        BaseResponse baseResponse = new BaseResponse(BaseResponse.falseCode,BaseResponse.falseMsg,null);
+        BaseResponse baseResponse = new BaseResponse(BaseResponse.falseCode,nle.getMessage(),null);
         return baseResponse;
     }
 

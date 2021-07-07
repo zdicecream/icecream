@@ -1,6 +1,7 @@
 package com.zdinit.icecream.sys.controller;
 
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -12,6 +13,7 @@ import com.zdinit.icecream.common.CommonValue;
 import com.zdinit.icecream.common.utils.ResponseUtil;
 import com.zdinit.icecream.sys.entity.Role;
 import com.zdinit.icecream.sys.entity.User;
+import com.zdinit.icecream.sys.service.IResourceService;
 import com.zdinit.icecream.sys.service.IRoleService;
 import com.zdinit.icecream.sys.service.IUserService;
 import com.zdinit.icecream.sys.vo.RoleVo;
@@ -21,7 +23,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -39,6 +43,8 @@ public class UserController extends BaseController {
     private IUserService userService;
     @Autowired
     private IRoleService roleService;
+    @Autowired
+    private IResourceService resourceService;
 
     @RequestMapping(value = "/getUserList", method = RequestMethod.GET)
     public BaseResponse getUserList(User user) throws Exception {
@@ -75,5 +81,16 @@ public class UserController extends BaseController {
     public BaseResponse saveUser(@RequestBody User user) throws Exception {
         userService.saveUser(user);
         return ResponseUtil.sucess(null);
+    }
+
+    @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
+    public BaseResponse getUserInfo() throws Exception {
+        User u = userService.getById(StpUtil.getLoginIdAsLong());
+        List<String> resources = resourceService.listResourceNameByUserId(StpUtil.getLoginIdAsLong());
+        u.setResourceList(resources);
+        Map<String,Object> map = new HashMap<>();
+        map.put("user",u);
+        map.put("resources",resources);
+        return ResponseUtil.sucess(map);
     }
 }

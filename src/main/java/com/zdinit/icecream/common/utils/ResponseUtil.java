@@ -15,7 +15,7 @@ public class ResponseUtil {
         return sucess(null);
     }
 
-    public static BaseResponse error(String code,String msg){
+    public static BaseResponse error(Integer code,String msg){
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setCode(code);
         baseResponse.setMsg(msg);

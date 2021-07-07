@@ -15,7 +15,7 @@ public class SaTokenConfigure {
     @Bean(name="SaTokenConfigure")
     public SaTokenConfig getSaTokenConfig() {
         SaTokenConfig config = new SaTokenConfig();
-        config.setTokenName("token");             // token名称 (同时也是cookie名称)
+        config.setTokenName("Access-Token");             // token名称 (同时也是cookie名称)
         config.setTimeout(30 * 60);       // token有效期，单位s 默认30天30 * 24 * 60 * 60
         config.setActivityTimeout(-1);              // token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
         config.setIsConcurrent(true);               // 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)

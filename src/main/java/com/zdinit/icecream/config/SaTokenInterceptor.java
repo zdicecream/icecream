@@ -29,9 +29,9 @@ public class SaTokenInterceptor implements WebMvcConfigurer {
             /*SaRouter.match("/admin/**", () -> StpUtil.checkRoleOr("admin", "super-admin"));*/
 
             // 权限认证 -- 不同模块, 校验不同权限
-            SaRouter.match("/sys/resource/**", () -> StpUtil.checkPermission("resource"));
-            SaRouter.match("/sys/role/**", () -> StpUtil.checkPermission("role"));
-            SaRouter.match("/sys/user/**", () -> StpUtil.checkPermission("user"));
+            SaRouter.match("/sys/resource/**", () -> StpUtil.checkPermission("myResourceList"));
+            SaRouter.match("/sys/role/**", () -> StpUtil.checkPermission("myRoleList"));
+            SaRouter.match("/sys/user/**", () -> StpUtil.checkPermission("myUserList"));
 
             // 匹配 restful 风格路由
             /*SaRouter.match("/article/get/{id}", () -> StpUtil.checkPermission("article"));*/
