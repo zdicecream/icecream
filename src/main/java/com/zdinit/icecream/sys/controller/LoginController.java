@@ -4,19 +4,13 @@ package com.zdinit.icecream.sys.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.zdinit.icecream.common.BaseController;
 import com.zdinit.icecream.common.BaseResponse;
-import com.zdinit.icecream.common.utils.RedisUtil;
 import com.zdinit.icecream.common.utils.ResponseUtil;
-import com.zdinit.icecream.sys.entity.Resource;
 import com.zdinit.icecream.sys.entity.User;
 import com.zdinit.icecream.sys.service.IGroupService;
 import com.zdinit.icecream.sys.service.IResourceService;
 import com.zdinit.icecream.sys.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -35,8 +29,7 @@ public class LoginController extends BaseController {
     private IResourceService resourceService;
     @Autowired
     private IGroupService groupService;
-    @Autowired
-    private RedisUtil redisUtil;
+
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public BaseResponse login(@RequestBody User userInfo) throws Exception {
@@ -61,13 +54,6 @@ public class LoginController extends BaseController {
     public BaseResponse logout() throws Exception {
         StpUtil.logout();
         return ResponseUtil.sucess("已登出");
-    }
-
-
-    @RequestMapping(value = "/msgSend", method = RequestMethod.POST)
-    public BaseResponse msgSend(@RequestParam String channel,@RequestParam String msg) throws Exception {
-        redisUtil.Publish(channel,msg);
-        return ResponseUtil.sucess();
     }
 
 }

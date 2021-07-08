@@ -3,15 +3,12 @@ package com.zdinit.icecream.sys.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.api.R;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zdinit.icecream.common.BaseController;
 import com.zdinit.icecream.common.BaseResponse;
 import com.zdinit.icecream.common.CommonValue;
 import com.zdinit.icecream.common.utils.ResponseUtil;
-import com.zdinit.icecream.sys.entity.Role;
+import com.zdinit.icecream.sys.entity.Resource;
 import com.zdinit.icecream.sys.entity.User;
 import com.zdinit.icecream.sys.service.IResourceService;
 import com.zdinit.icecream.sys.service.IRoleService;
@@ -21,7 +18,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -86,11 +82,13 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
     public BaseResponse getUserInfo() throws Exception {
         User u = userService.getById(StpUtil.getLoginIdAsLong());
-        List<String> resources = resourceService.listResourceNameByUserId(StpUtil.getLoginIdAsLong());
-        u.setResourceList(resources);
+        List<Resource> resources = resourceService.listResourceByUserId(StpUtil.getLoginIdAsLong());
+        List<Resource> menuList = this.resourceService.pack(resources);
+        u.setResourceList(menuList);
+
         Map<String,Object> map = new HashMap<>();
         map.put("user",u);
-        map.put("resources",resources);
+        map.put("resources",resources.stream().filter(m->m.getType().equals(CommonValue.MENU)).map(m->m.getResourceCode()).collect(Collectors.toList()));
         return ResponseUtil.sucess(map);
     }
 }

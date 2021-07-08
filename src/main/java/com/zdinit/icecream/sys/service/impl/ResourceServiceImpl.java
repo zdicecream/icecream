@@ -1,5 +1,6 @@
 package com.zdinit.icecream.sys.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.zdinit.icecream.common.CommonValue;
@@ -8,7 +9,8 @@ import com.zdinit.icecream.sys.entity.Role;
 import com.zdinit.icecream.sys.mapper.ResourceMapper;
 import com.zdinit.icecream.sys.service.IResourceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -29,6 +32,8 @@ import java.util.stream.Collectors;
 @Service
 public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements IResourceService {
 
+    @Autowired
+    private RedisTemplate redisTemplate;
     @Override
     public List<Resource> listResourceByids(List keys) {
         return this.baseMapper.listResourceByids(keys);
@@ -202,8 +207,16 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     }
 
     @Override
-    public List<String> listResourceNameByUserId(Long id) {
-        return this.baseMapper.listResourceNameByUserId(id);
+    public List<Resource> listResourceByUserId(Long id) {
+        if(redisTemplate.hasKey("Resource{"+id+"}")){
+            JSONArray jsonArray = (JSONArray) redisTemplate.opsForValue().get("Resource{"+id+"}");
+            List<Resource> res = jsonArray.toJavaList(Resource.class);
+            return res;
+        }else {
+            List<Resource> res = this.baseMapper.listResourceByUserId(id);
+            redisTemplate.opsForValue().set("Resource{"+id+"}",res,5, TimeUnit.MINUTES);
+            return res;
+        }
     }
 
     private Map<Long, List<Resource>> packMap(List<Resource> list){

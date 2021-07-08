@@ -3,17 +3,12 @@ package com.zdinit.icecream.draft.runstate.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zdinit.icecream.common.BaseResponse;
-import com.zdinit.icecream.common.utils.RedisUtil;
 import com.zdinit.icecream.common.utils.ResponseUtil;
 import com.zdinit.icecream.draft.runstate.entity.CdRunstate;
 import com.zdinit.icecream.draft.runstate.service.ICdRunstateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -34,14 +29,12 @@ import java.util.Map;
 public class CdRunstateController {
 
     @Autowired
-    private RedisUtil redisUtil;
-    @Autowired
     private ICdRunstateService runstateService;
 
     @RequestMapping(value = "/getRunstate", method = RequestMethod.GET)
     public BaseResponse getRunstate() throws Exception {
         Map<String, String> map = new HashMap<>();
-        map.put("bankname", redisUtil.get("bankname"));
+        //map.put("bankname", redisUtil.get("bankname"));
         return ResponseUtil.sucess(map);
     }
 

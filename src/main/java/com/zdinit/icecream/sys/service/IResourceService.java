@@ -38,5 +38,5 @@ public interface IResourceService extends IService<Resource> {
 
     void removeResourceById(Long id);
 
-    List<String> listResourceNameByUserId(Long id);
+    List<Resource> listResourceByUserId(Long id);
 }

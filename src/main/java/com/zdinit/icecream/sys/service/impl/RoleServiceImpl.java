@@ -63,8 +63,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
              * 原权限列表
              */
             List<Resource> resourceList = resourceService.listResourceById(role.getId());
-            List<Long> keys = resourceList.stream().map(m->m.getId()).collect(Collectors.toList());
-            List<Long> allKeys= this.getPid(keys,allResourceList);
+            List<Long> allKeys = resourceList.stream().map(m->m.getId()).collect(Collectors.toList());
             /**
              * 新权限列表
              */

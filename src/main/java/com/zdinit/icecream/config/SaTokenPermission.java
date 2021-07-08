@@ -1,8 +1,7 @@
 package com.zdinit.icecream.config;
 
 import cn.dev33.satoken.stp.StpInterface;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.zdinit.icecream.sys.entity.Resource;
+import com.zdinit.icecream.common.CommonValue;
 import com.zdinit.icecream.sys.service.IResourceService;
 import com.zdinit.icecream.sys.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class SaTokenPermission implements StpInterface {
 
     @Override
     public List<String> getPermissionList(Object o, String s) {
-        return resourceService.listResourceNameByUserId(Long.parseLong((String) o));
+        return resourceService.listResourceByUserId(Long.parseLong((String) o)).stream().filter(m->m.getType().equals(CommonValue.MENU)).map(m-> m.getResourceCode()).collect(Collectors.toList());
     }
 
     @Override

@@ -27,7 +27,7 @@
 
     <select id="listResourceByid" resultType="com.zdinit.icecream.sys.entity.Resource" >
         select sr.*,srr.roleid from sys_resource sr left join sys_role_resource srr on srr.resourceid=sr.id
-        where srr.roleid = #{id} and sr.type = 2
+        where srr.roleid = #{id}
     </select>
 
     <delete id="delResource">
@@ -47,7 +47,7 @@
         where srr.resourceid = #{id}
     </select>
 
-    <select id="listResourceNameByUserId" resultType="java.lang.String">
-        select sr.resource_code from sys_user_role sur,sys_role_resource srr,sys_resource sr where sur.roleid=srr.roleid and srr.resourceid=sr.id and sur.userid= #{id}
+    <select id="listResourceByUserId" resultType="com.zdinit.icecream.sys.entity.Resource">
+        select sr.* from sys_user_role sur,sys_role_resource srr,sys_resource sr where sur.roleid=srr.roleid and srr.resourceid=sr.id and sur.userid= #{id}
     </select>
 </mapper>

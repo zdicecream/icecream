@@ -1,9 +1,7 @@
 package com.zdinit.icecream.common.task;
 
-import com.zdinit.icecream.common.utils.RedisUtil;
 //import com.zdinit.icecream.sys.entity.TDictionary;
 //import com.zdinit.icecream.sys.service.ITDictionaryService;
-import com.zdinit.icecream.draft.runstate.entity.CdRunstate;
 import com.zdinit.icecream.draft.runstate.service.ICdRunstateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +13,6 @@ import org.springframework.stereotype.Component;
 @Order(2)
 @Slf4j
 public class CacheRunner implements CommandLineRunner {
-    @Autowired
-    private RedisUtil redisUtil;
     @Autowired
     private ICdRunstateService runstateService;
 

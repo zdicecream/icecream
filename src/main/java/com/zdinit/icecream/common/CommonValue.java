@@ -18,18 +18,6 @@ public class CommonValue {
      */
     public static final int OPERATION = 2;
     /**
-     * 一级菜单
-     */
-    public static final String MENU_LEVEL1 = "1";
-    /**
-     * 二级菜单
-     */
-    public static final String MENU_LEVEL2 = "2";
-    /**
-     * 三级菜单
-     */
-    public static final String MENU_LEVEL3 = "3";
-    /**
      * 叶子
      */
     public static final int TREE_LEAF = 1;

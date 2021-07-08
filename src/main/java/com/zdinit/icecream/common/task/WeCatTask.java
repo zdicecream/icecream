@@ -19,11 +19,11 @@ public class WeCatTask extends QuartzJobBean {
     private ICdRunstateService runstateService;
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        log.info("TaskTest");
+/*        log.info("TaskTest");
         CdRunstate runstate = runstateService.getOne(null);
         if (runstate != null && !runstate.getWorkDate().equals(runstate.getRsCurdate())) {
             runstate.setWorkDate(runstate.getRsCurdate());
             runstateService.saveOrUpdate(runstate);
-        }
+        }*/
     }
 }
