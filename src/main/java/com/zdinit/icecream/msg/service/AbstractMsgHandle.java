@@ -1,4 +1,4 @@
-package com.zdinit.icecream.msg.service.impl;
+package com.zdinit.icecream.msg.service;
 
 import com.zdinit.icecream.msg.entity.AbstractMsg;
 import com.zdinit.icecream.msg.service.IMsgHandle;
