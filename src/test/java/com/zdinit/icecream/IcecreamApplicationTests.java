@@ -18,7 +18,7 @@ class IcecreamApplicationTests {
 		Msg001 msg1 = (Msg001) MsgFactory.createMsg(MsgCommonValue.MSG001);
 		MsgSendManager.send(msg1);
 
-		String msgText = "msg001~{\"createTime\":\"2021-07-30T17:31:10.002\",\"msgId\":\"1231313123\",\"id\":112131312,\"state\":1,\"msgCode\":\"msg001\"}";
+		String msgText = "msg001~{\"createTime\":\"2021-07-30T17:31:10.002\",\"msgId\":\"1231313123\",\"id\":112131312,\"state\":1,\"msgCode\":\"msg001\",\"nb\":\"1212\"}";
 		String[] msgString = msgText.split(MsgCommonValue.MSGSPLIT);
 		String msgCode = msgString[0];
 		JSON json = (JSON) JSON.parse(msgString[1]);
