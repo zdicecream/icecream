@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdinit.icecream.common.workflow.mapper.WfWorkflowMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zdinit.icecream.common.workflow.entity.WfWorkflow">
+        <id column="id" property="id" />
+        <result column="workflow_num" property="workflowNum" />
+        <result column="start_time" property="startTime" />
+        <result column="finish_time" property="finishTime" />
+        <result column="cur_deal_role" property="curDealRole" />
+        <result column="cur_deal_role_id" property="curDealRoleId" />
+        <result column="cur_deal_user" property="curDealUser" />
+        <result column="state" property="state" />
+        <result column="flow_id" property="flowId" />
+        <result column="node_id" property="nodeId" />
+        <result column="commit_username" property="commitUsername" />
+        <result column="commit_user_id" property="commitUserId" />
+        <result column="commit_group_name" property="commitGroupName" />
+        <result column="commit_group_id" property="commitGroupId" />
+        <result column="bus_id" property="busId" />
+        <result column="pre_deal_user_id" property="preDealUserId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, workflow_num, start_time, finish_time, cur_deal_role, cur_deal_role_id, cur_deal_user, state, flow_id, node_id, commit_username, commit_user_id, commit_group_name, commit_group_id, bus_id, pre_deal_user_id
+    </sql>
+
+</mapper>

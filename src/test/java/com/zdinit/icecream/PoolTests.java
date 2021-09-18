@@ -27,9 +27,57 @@ class PoolTests {
     }
 
     public static void main(String[] args) throws SQLException {
+/*
         new PoolTests().contextLoads();
-
+*/
+        new PoolTests().ts();
     }
+    void ts(){
+        List<Asset> assetList = new ArrayList<>();
+        Asset asset1 = new Asset();
+        asset1.setAmount(new BigDecimal(70));
+        asset1.setName("资产1");
+        Calendar c1 = Calendar.getInstance();
+        c1.set(2021,1,2);
+        asset1.setDate(c1.getTime());
+
+        Asset asset2 = new Asset();
+        asset2.setAmount(new BigDecimal(10));
+        asset2.setName("资产2");
+        Calendar c2 = Calendar.getInstance();
+        c2.set(2021,1,3);
+        asset2.setDate(c2.getTime());
+
+        Asset asset3 = new Asset();
+        asset3.setAmount(new BigDecimal(80));
+        asset3.setName("资产3");
+        Calendar c3 = Calendar.getInstance();
+        c3.set(2021,1,5);
+        asset3.setDate(c3.getTime());
+
+        Asset asset4 = new Asset();
+        asset4.setAmount(new BigDecimal(120));
+        asset4.setName("资产4");
+        Calendar c4 = Calendar.getInstance();
+        c4.set(2021,1,6);
+        asset4.setDate(c4.getTime());
+
+        Asset asset5 = new Asset();
+        asset5.setAmount(new BigDecimal(33));
+        asset5.setName("无限期资产5");
+        assetList.add(asset5);
+        assetList.add(asset4);
+        assetList.add(asset3);
+        assetList.add(asset2);
+        assetList.add(asset1);
+
+
+        String s = assetList.stream().map(asset -> asset.getName()).collect(Collectors.joining(" "));
+
+        System.out.println(s);
+    }
+
+
 
     @Test
     void contextLoads() throws SQLException {

@@ -25,6 +25,25 @@ public class CommonValue {
      * 非叶子
      */
     public static final int TREE_NOT_LEAF = 0;
-
+    /**
+     * 工作流-新建
+     */
+    public static final int FLOW_BUILT = 0;
+    /**
+     * 工作流-已提交
+     */
+    public static final int FLOW_SUBMIT = 1;
+    /**
+     * 工作流-已结束
+     */
+    public static final int FLOW_CLOSE = 2;
+    /**
+     * 工作流-同意
+     */
+    public static final String FLOW_YES = "yes";
+    /**
+     * 工作流-不同意
+     */
+    public static final String FLOW_NO = "no";
 
 }
