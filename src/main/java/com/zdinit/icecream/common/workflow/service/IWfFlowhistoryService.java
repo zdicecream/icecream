@@ -10,7 +10,7 @@ import com.zdinit.icecream.common.workflow.entity.WfWorkflow;
  * </p>
  *
  * @author zd
- * @since 2021-09-17
+ * @since 2021-09-22
  */
 public interface IWfFlowhistoryService extends IService<WfFlowhistory> {
 

@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author zd
- * @since 2021-09-17
+ * @since 2021-09-22
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -22,7 +22,7 @@ public class WfFlowhistory extends Model<WfFlowhistory> {
 
     private Long id;
 
-    private Long wordflowId;
+    private Long workflowId;
 
     private LocalDateTime dealTime;
 

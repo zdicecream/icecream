@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author zd
- * @since 2021-09-17
+ * @since 2021-09-22
  */
 @RestController
-@RequestMapping("/common.workflow/wf-flowhistory")
+@RequestMapping("/common/workflow/wfFlowhistory")
 public class WfFlowhistoryController {
 
 }

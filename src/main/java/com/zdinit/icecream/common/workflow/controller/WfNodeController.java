@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-09-17
  */
 @RestController
-@RequestMapping("/common.workflow/wf-node")
+@RequestMapping("/common/workflow/wfNode")
 public class WfNodeController {
 
 }
