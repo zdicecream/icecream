@@ -1,6 +1,7 @@
 package com.zdinit.icecream.common.workflow.service;
 
 import com.zdinit.icecream.common.workflow.entity.WfFlowhistory;
+import com.zdinit.icecream.common.workflow.entity.WfNode;
 import com.zdinit.icecream.common.workflow.entity.WfWorkflow;
 
 import java.util.List;
@@ -17,17 +18,19 @@ public interface IFlowQueryInterface {
     /**
      * 查询审批中的流程
      */
-    List<WfWorkflow> querySubmittedFlow();
+    List<WfWorkflow> querySubmittedFlow(Long id,Long roleId);
 
     /**
      * 查询已结束的流程
      */
-    List<WfWorkflow> queryFinishedFlow();
+    List<WfWorkflow> queryFinishedFlow(Long id);
 
     /**
      * 当前流程监控
+     * @param flowId 审批流表id
+     * @return
      */
-    WfWorkflow queryFlowMonitor();
+    List<WfNode> queryFlowMonitor(Long flowId);
 
     /**
      * 查询流程审批历史

@@ -143,28 +143,21 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
     }
 
     @Override
-    public void revoke(Long workflowId) {
+    public void revoke(Long workflowId) throws Exception{
         List<Long> workflowIds = new ArrayList<>();
         workflowIds.add(workflowId);
         this.revoke(workflowIds);
     }
 
     @Override
-    public void revoke(List<Long> workflowIds) {
+    public void revoke(List<Long> workflowIds) throws Exception{
         for (Long l:workflowIds){
             WfWorkflow wfWorkflow = this.workflowService.getById(l);
-            WfNode node = this.nodeService.getById(wfWorkflow.getNodeId());
-            WfNode pre = this.nodeService.getById(node.getPreviousNodeId());
-            wfWorkflow.setNodeId(pre.getId());
-            wfWorkflow.setCurDealRole(pre.getDealRole());
-            wfWorkflow.setCurDealRoleId(pre.getDealRoleId());
-            List<User> userList = this.userService.listUserByRoleId(pre.getDealRoleId());
-            wfWorkflow.setCurDealUser(userList.stream().map(user -> user.getUsername()).collect(Collectors.joining(" ")));
+            if (wfWorkflow.getState().equals(CommonValue.FLOW_SUBMIT) && wfWorkflow.getPreDealUserId()!=0){
+                throw new Exception("清选择未被审批状态的流程");
+            }
+            wfWorkflow.setState(CommonValue.FLOW_BUILT);
             this.workflowService.save(wfWorkflow);
-            /**
-             * 记录审批记录
-             */
-            flowhistoryService.saveHistory(wfWorkflow,CommonValue.FLOW_NO,"撤回");
         }
     }
 

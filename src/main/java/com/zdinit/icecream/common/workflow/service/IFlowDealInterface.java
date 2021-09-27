@@ -9,6 +9,13 @@ public interface IFlowDealInterface {
 
     /**
      * 新建
+     * @param userId 提交人id
+     * @param username 提交人名称
+     * @param deptId 部门id
+     * @param deptName 部门名称
+     * @param busId 业务表id
+     * @param flowId 审批流id
+     * @return 新建审批流编号
      */
     String built(Long userId,String username,Long deptId,String deptName,Long busId,Long flowId);
 
@@ -58,14 +65,14 @@ public interface IFlowDealInterface {
     void approve(List<Long> workflowIds,String dealOpinion,User dealUser);
 
     /**
-     * 撤回
+     * 撤回提交
      */
-    void revoke(Long workflowId);
+    void revoke(Long workflowId)throws Exception;
 
     /**
-     * 批量撤回
+     * 批量撤回提交
      */
-    void revoke(List<Long> workflowIds);
+    void revoke(List<Long> workflowIds)throws Exception;
 
     /**
      * 驳回上一岗
