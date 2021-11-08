@@ -9,6 +9,7 @@ import com.zdinit.icecream.sys.entity.User;
 import com.zdinit.icecream.sys.service.IGroupService;
 import com.zdinit.icecream.sys.service.IResourceService;
 import com.zdinit.icecream.sys.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
  * @author zd
  * @since 2020-09-01
  */
+@Slf4j
 @RestController
 @RequestMapping("/sys")
 public class LoginController extends BaseController {
@@ -42,6 +44,7 @@ public class LoginController extends BaseController {
             return ResponseUtil.error("密码错误");
         }
         StpUtil.login(user.getId());
+        log.info(StpUtil.getTokenValue());
         return ResponseUtil.sucess(StpUtil.getTokenInfo());
     }
 

@@ -77,7 +77,7 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
         for (Long l:workflowIds){
             WfWorkflow wfWorkflow = this.workflowService.getById(l);
             wfWorkflow.setState(CommonValue.FLOW_SUBMIT);
-            this.workflowService.save(wfWorkflow);
+            this.workflowService.updateById(wfWorkflow);
         }
     }
 
@@ -93,7 +93,7 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
         for (Long l:workflowIds){
             WfWorkflow wfWorkflow = this.workflowService.getById(l);
             wfWorkflow.setState(CommonValue.FLOW_CLOSE);
-            this.workflowService.save(wfWorkflow);
+            this.workflowService.updateById(wfWorkflow);
         }
     }
 
@@ -134,7 +134,7 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
             wfWorkflow.setCurDealRoleId(next.getDealRoleId());
             List<User> userList = this.userService.listUserByRoleId(next.getDealRoleId());
             wfWorkflow.setCurDealUser(userList.stream().map(user -> user.getUsername()).collect(Collectors.joining(" ")));
-            this.workflowService.save(wfWorkflow);
+            this.workflowService.updateById(wfWorkflow);
             /**
              * 记录审批记录
              */
@@ -153,11 +153,11 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
     public void revoke(List<Long> workflowIds) throws Exception{
         for (Long l:workflowIds){
             WfWorkflow wfWorkflow = this.workflowService.getById(l);
-            if (wfWorkflow.getState().equals(CommonValue.FLOW_SUBMIT) && wfWorkflow.getPreDealUserId()!=0){
+            if (wfWorkflow.getState().equals(CommonValue.FLOW_SUBMIT) && wfWorkflow.getPreDealUserId()!=null){
                 throw new Exception("清选择未被审批状态的流程");
             }
             wfWorkflow.setState(CommonValue.FLOW_BUILT);
-            this.workflowService.save(wfWorkflow);
+            this.workflowService.updateById(wfWorkflow);
         }
     }
 
@@ -179,7 +179,7 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
             wfWorkflow.setCurDealRoleId(pre.getDealRoleId());
             List<User> userList = this.userService.listUserByRoleId(pre.getDealRoleId());
             wfWorkflow.setCurDealUser(userList.stream().map(user -> user.getUsername()).collect(Collectors.joining(" ")));
-            this.workflowService.save(wfWorkflow);
+            this.workflowService.updateById(wfWorkflow);
             /**
              * 记录审批记录
              */
@@ -204,7 +204,7 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
             wfWorkflow.setPreDealUserId(null);
             wfWorkflow.setCurDealUser(null);
             wfWorkflow.setState(CommonValue.FLOW_BUILT);
-            this.workflowService.save(wfWorkflow);
+            this.workflowService.updateById(wfWorkflow);
             /**
              * 记录审批记录
              */

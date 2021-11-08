@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public BaseResponse<String> defaultErrorHandler(HttpServletRequest req, Exception e){
         log.info("系统错误",e);
-        BaseResponse baseResponse = new BaseResponse(BaseResponse.errorCode,BaseResponse.errorMsg,null);
+        BaseResponse baseResponse = new BaseResponse(BaseResponse.errorCode,BaseResponse.errorMsg+"["+e.getMessage()+"]",null);
         return baseResponse;
     }
 
