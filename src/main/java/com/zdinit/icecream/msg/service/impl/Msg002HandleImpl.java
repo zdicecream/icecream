@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-@Order(1)
 public class Msg002HandleImpl extends AbstractMsgHandle {
 
     @Override

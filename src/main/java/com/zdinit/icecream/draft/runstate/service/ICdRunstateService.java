@@ -14,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface ICdRunstateService extends IService<CdRunstate> {
 
     void testTran(CdRunstate cdRunstate) throws Exception;
+
 }

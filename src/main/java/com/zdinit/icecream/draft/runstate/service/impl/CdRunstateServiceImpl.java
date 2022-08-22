@@ -9,7 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -29,5 +33,25 @@ public class CdRunstateServiceImpl extends ServiceImpl<CdRunstateMapper, CdRunst
         c.setWorkDate(new Date());
         c.setRsApid("123");
         this.save(c);
-    };
+    }
+
+    public void filterList() throws Exception {
+        /**
+         * 筛选指定条件的list，两种模式（重sql，重java）
+         */
+        /**
+         * 重java
+         */
+        List<String> stringList = new ArrayList<>();
+        stringList = stringList.stream().filter(s -> s.equals("11")).collect(Collectors.toList());
+
+        /**
+         * 重sql
+
+          "select * from xxx where a>b";
+         */
+
+    }
+
+    ;
 }
