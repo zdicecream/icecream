@@ -22,9 +22,9 @@ spring:
       time-between-eviction-runs-millis: 60000
       # 配置一个连接在池中最小生存的时间，单位是毫秒
       min-evictable-idle-time-millis: 30000
-#      validation-query: SELECT 1 FROM DUAL
+      validation-query: SELECT 1
       test-while-idle: true
-      test-on-borrow: true
+      test-on-borrow: false
       test-on-return: false
       # 是否缓存preparedStatement，也就是PSCache  官方建议MySQL下建议关闭   个人建议如果想用SQL防火墙 建议打开
       pool-prepared-statements: true
@@ -57,11 +57,12 @@ spring:
     out-of-order: false #防止开发环境下漏掉没来得及apply的文件，产品环境最好设为false
     locations: classpath:/dbScript
   redis:
-    #redis数据库索引，默认0
-    database: 0
-    #redis数据库地址
-    host: localhost
-    port: 6379
+  #单机模式
+#    #redis数据库索引，默认0
+#    database: 0
+#    #redis数据库地址
+#    host: localhost
+#    port: 6379
 #    password: root
 #    lettuce:
 #      pool:
@@ -70,7 +71,12 @@ spring:
 #        min-idle: 0
 #        max-wait: 1000ms
 #      shutdown-timeout: 1000ms
-    timeout: 5000ms
+#    timeout: 5000ms
+  #集群模式
+    cluster:
+      nodes: 130.1.14.125:6049,130.1.14.126:6049,130.1.14.127:6049,130.1.14.128:6049,130.1.14.129:6049,130.1.14.130:6049
+      max-redirects: 3  # 获取失败 最大重定向次数
+    password: rxtd@123
 
 #mybatis
 mybatis-plus:

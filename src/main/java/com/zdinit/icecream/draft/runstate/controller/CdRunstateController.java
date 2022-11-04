@@ -32,7 +32,7 @@ public class CdRunstateController {
     private ICdRunstateService runstateService;
 
     @RequestMapping(value = "/getRunstate", method = RequestMethod.GET)
-    public BaseResponse getRunstate() throws Exception {
+    public BaseResponse getRunstate(){
         Map<String, String> map = new HashMap<>();
         //map.put("bankname", redisUtil.get("bankname"));
         return ResponseUtil.sucess(map);
@@ -44,7 +44,7 @@ public class CdRunstateController {
      * @throws Exception
      */
     @RequestMapping(value = "/getRunstate1", method = RequestMethod.GET)
-    public BaseResponse getRunstate1() throws Exception {
+    public BaseResponse getRunstate1(){
         List<CdRunstate> cdRunstateList = runstateService.list();
         return ResponseUtil.sucess(cdRunstateList);
     }
@@ -56,10 +56,9 @@ public class CdRunstateController {
      * @throws Exception
      */
     @RequestMapping(value = "/addRunstate", method = RequestMethod.POST)
-    public BaseResponse addRunstate(@RequestBody CdRunstate cdRunstate) throws Exception {
+    public BaseResponse addRunstate(@RequestBody CdRunstate cdRunstate){
 
         cdRunstate.setWorkDate(new Date());
-        cdRunstate.setRsApid("123");
         runstateService.save(cdRunstate);
         runstateService.testTran(cdRunstate);
         return ResponseUtil.sucess();
@@ -72,13 +71,13 @@ public class CdRunstateController {
      * @throws Exception
      */
     @RequestMapping(value = "/delRunstate", method = RequestMethod.POST)
-    public BaseResponse delRunstate(@RequestParam List<String> cdRunstateList) throws Exception {
+    public BaseResponse delRunstate(@RequestParam List<String> cdRunstateList){
         runstateService.removeByIds(cdRunstateList);
         return ResponseUtil.sucess();
     }
 
     @RequestMapping(value = "/updateRunstate", method = RequestMethod.POST)
-    public BaseResponse updateRunstate(@RequestBody CdRunstate cdRunstate) throws Exception {
+    public BaseResponse updateRunstate(@RequestBody CdRunstate cdRunstate){
         CdRunstate cdRunstateCur = runstateService.getById(cdRunstate.getId());
         if (cdRunstateCur != null) {
             cdRunstateCur.setWorkDate(new Date());
@@ -94,14 +93,14 @@ public class CdRunstateController {
      * @throws Exception
      */
     @RequestMapping(value = "/getRunstatePage", method = RequestMethod.GET)
-    public BaseResponse getRunstatePage(@RequestBody Page page) throws Exception {
+    public BaseResponse getRunstatePage(@RequestBody Page page){
         Page<CdRunstate> cdRunstateList = runstateService.page(page);
         return ResponseUtil.sucess(cdRunstateList);
     }
 
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public BaseResponse test() throws Exception {
+    public BaseResponse test(){
 
         return ResponseUtil.sucess();
     }

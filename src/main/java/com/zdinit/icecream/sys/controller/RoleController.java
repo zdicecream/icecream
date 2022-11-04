@@ -42,7 +42,7 @@ public class RoleController extends BaseController {
     private IUserService userService;
 
     @RequestMapping(value = "/getRoleList", method = RequestMethod.GET)
-    public BaseResponse getRoleList(Role role) throws Exception {
+    public BaseResponse getRoleList(Role role){
         QueryWrapper<Role> wrapper = new QueryWrapper();
         if (StringUtils.isNotBlank(role.getRoleName())){
             wrapper.and(w-> w.likeLeft("role_name",role.getRoleName()).or().likeRight("role_name",role.getRoleName()));
@@ -73,17 +73,17 @@ public class RoleController extends BaseController {
     }
 
     @RequestMapping(value = "/getAllRoleList", method = RequestMethod.GET)
-    public BaseResponse getAllRoleList() throws Exception {
+    public BaseResponse getAllRoleList(){
         List<Role> roleList = this.roleService.list();
         return ResponseUtil.sucess(roleList);
     }
     @RequestMapping(value = "/saveRole", method = RequestMethod.POST)
-    public BaseResponse saveRole(@RequestBody Role role) throws Exception {
+    public BaseResponse saveRole(@RequestBody Role role){
         this.roleService.saveRole(role);
         return ResponseUtil.sucess(null);
     }
     @RequestMapping(value = "/delRole", method = RequestMethod.POST)
-    public BaseResponse delRole(@RequestParam Long id) throws Exception {
+    public BaseResponse delRole(@RequestParam Long id){
         List<User> users = this.userService.listUserByRoleId(id);
         if (users == null || users.size()<=0) {
             this.roleService.removeRoleById(id);

@@ -38,6 +38,14 @@ public class CommonValue {
      */
     public static final int FLOW_CLOSE = 2;
     /**
+     * 工作流-驳回
+     */
+    public static final int FLOW_REJECT = 3;
+    /**
+     * 工作流-挂起
+     */
+    public static final int FLOW_SUSPEND = 4;
+    /**
      * 工作流-同意
      */
     public static final String FLOW_YES = "yes";

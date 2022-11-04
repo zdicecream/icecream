@@ -43,7 +43,7 @@ public class UserController extends BaseController {
     private IResourceService resourceService;
 
     @RequestMapping(value = "/getUserList", method = RequestMethod.GET)
-    public BaseResponse getUserList(User user) throws Exception {
+    public BaseResponse getUserList(User user){
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         if (null != user.getState()){
             wrapper.eq("state",user.getState());
@@ -68,19 +68,19 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = "/delUser", method = RequestMethod.POST)
-    public BaseResponse delUser(@RequestParam String id) throws Exception {
+    public BaseResponse delUser(@RequestParam String id){
         userService.removeUserById(id);
         return ResponseUtil.sucess(null);
     }
 
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
-    public BaseResponse saveUser(@RequestBody User user) throws Exception {
+    public BaseResponse saveUser(@RequestBody User user){
         userService.saveUser(user);
         return ResponseUtil.sucess(null);
     }
 
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
-    public BaseResponse getUserInfo() throws Exception {
+    public BaseResponse getUserInfo(){
         User u = userService.getById(StpUtil.getLoginIdAsLong());
         List<Resource> resources = resourceService.listResourceByUserId(StpUtil.getLoginIdAsLong());
         List<Resource> menuList = this.resourceService.pack(resources);

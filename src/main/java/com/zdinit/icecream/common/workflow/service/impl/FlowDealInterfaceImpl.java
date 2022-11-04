@@ -1,6 +1,7 @@
 package com.zdinit.icecream.common.workflow.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.zdinit.icecream.common.CheckException;
 import com.zdinit.icecream.common.CommonValue;
 import com.zdinit.icecream.common.workflow.entity.WfFlowhistory;
 import com.zdinit.icecream.common.workflow.entity.WfNode;
@@ -41,28 +42,20 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMddHHmmss");
         workflow.setWorkflowNum(userId.toString().substring(0,10)+LocalDateTime.now().format(dtf));
         workflow.setStartTime(LocalDateTime.now());
-
-        QueryWrapper<WfNode> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("flow_id",flowId);
-        queryWrapper.isNull("previous_node_id");
-        WfNode node = nodeService.getOne(queryWrapper);
-        workflow.setCurDealRole(node.getDealRole());
-        workflow.setCurDealRoleId(node.getDealRoleId());
-
-        List<User> userList = userService.listUserByRoleId(workflow.getCurDealRoleId());
-        workflow.setCurDealUser(userList.stream().map(user -> user.getUsername()).collect(Collectors.joining(" ")));
-
         workflow.setState(CommonValue.FLOW_BUILT);
         workflow.setFlowId(flowId);
-        workflow.setNodeId(node.getId());
         this.workflowService.save(workflow);
-
         return workflow.getWorkflowNum();
     }
 
     @Override
-    public void revise(WfWorkflow workflow) {
-
+    public void revise(WfWorkflow workflow){
+        WfWorkflow workflowOld = this.workflowService.getById(workflow.getId());
+        if (workflowOld == null){
+            throw new CheckException("清选择未被审批状态的流程");
+        }
+        workflowOld.setBusId(workflow.getBusId());
+        this.workflowService.updateById(workflowOld);
     }
 
     @Override
@@ -74,11 +67,41 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
 
     @Override
     public void submit(List<Long> workflowIds) {
-        for (Long l:workflowIds){
-            WfWorkflow wfWorkflow = this.workflowService.getById(l);
-            wfWorkflow.setState(CommonValue.FLOW_SUBMIT);
-            this.workflowService.updateById(wfWorkflow);
-        }
+//        for (Long l:workflowIds){
+//            WfWorkflow wfWorkflow = this.workflowService.getById(l);
+//
+//
+//
+//            QueryWrapper<WfNode> queryWrapper = new QueryWrapper<>();
+//            queryWrapper.eq("flow_id",wfWorkflow.getFlowId());
+//            queryWrapper.isNull(23123"previous_node_id");
+//            WfNode node = nodeService.getOne(queryWrapper);
+//            workflow.setCurDealRole(node.getDealRole());
+//            workflow.setCurDealRoleId(node.getDealRoleId());
+//
+//            List<User> userList = userService.listUserByRoleId(workflow.getCurDealRoleId());
+//            workflow.setCurDealUser(userList.stream().map(user -> user.getUsername()).collect(Collectors.joining(" ")));
+//
+//            workflow.setState(CommonValue.FLOW_BUILT);
+//            workflow.setFlowId(flowId);
+//            workflow.setNodeId(node.getId());
+//
+//            WfWorkflow wfWorkflow = this.workflowService.getById(l);
+//            WfNode node = this.nodeService.getById(wfWorkflow.getNodeId());
+//            WfNode next = this.nodeService.getById(node.getNextNodeId());
+//            wfWorkflow.setNodeId(next.getId());
+//            wfWorkflow.setPreDealUserId(dealUser.getId());
+//            wfWorkflow.setCurDealRole(next.getDealRole());
+//            wfWorkflow.setCurDealRoleId(next.getDealRoleId());
+//            List<User> userList = this.userService.listUserByRoleId(next.getDealRoleId());
+//            wfWorkflow.setCurDealUser(userList.stream().map(user -> user.getUsername()).collect(Collectors.joining(" ")));
+//            this.workflowService.updateById(wfWorkflow);
+//
+//
+//            wfWorkflow.setState(CommonValue.FLOW_SUBMIT);
+//            this.workflowService.updateById(wfWorkflow);
+//
+//        }
     }
 
     @Override
@@ -98,18 +121,18 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
     }
 
     @Override
-    public void delete(Long workflowId)  throws Exception{
+    public void delete(Long workflowId){
         List<Long> workflowIds = new ArrayList<>();
         workflowIds.add(workflowId);
         this.delete(workflowIds);
     }
 
     @Override
-    public void delete(List<Long> workflowIds) throws Exception{
+    public void delete(List<Long> workflowIds){
         for (Long l:workflowIds){
             WfWorkflow wfWorkflow = this.workflowService.getById(l);
             if (wfWorkflow.getState().equals(CommonValue.FLOW_SUBMIT)){
-                throw new Exception("清选择未提交或者已结束状态的流程");
+                throw new CheckException("清选择未提交或者已结束状态的流程");
             }
             this.workflowService.removeById(l);
         }
@@ -143,18 +166,18 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
     }
 
     @Override
-    public void revoke(Long workflowId) throws Exception{
+    public void revoke(Long workflowId){
         List<Long> workflowIds = new ArrayList<>();
         workflowIds.add(workflowId);
         this.revoke(workflowIds);
     }
 
     @Override
-    public void revoke(List<Long> workflowIds) throws Exception{
+    public void revoke(List<Long> workflowIds){
         for (Long l:workflowIds){
             WfWorkflow wfWorkflow = this.workflowService.getById(l);
             if (wfWorkflow.getState().equals(CommonValue.FLOW_SUBMIT) && wfWorkflow.getPreDealUserId()!=null){
-                throw new Exception("清选择未被审批状态的流程");
+                throw new CheckException("清选择未被审批状态的流程");
             }
             wfWorkflow.setState(CommonValue.FLOW_BUILT);
             this.workflowService.updateById(wfWorkflow);
@@ -162,14 +185,19 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
     }
 
     @Override
-    public void rejectToPrevious(Long workflowId, String dealOpinion) {
-        List<Long> workflowIds = new ArrayList<>();
-        workflowIds.add(workflowId);
-        this.rejectToPrevious(workflowIds,dealOpinion);
+    public void adjust(Long workflowId, Long adjustWorkflowId, String dealOpinion) {
+
     }
 
     @Override
-    public void rejectToPrevious(List<Long> workflowIds, String dealOpinion) {
+    public void reject(Long workflowId, String dealOpinion) {
+        List<Long> workflowIds = new ArrayList<>();
+        workflowIds.add(workflowId);
+        this.reject(workflowIds,dealOpinion);
+    }
+
+    @Override
+    public void reject(List<Long> workflowIds, String dealOpinion) {
         for (Long l:workflowIds){
             WfWorkflow wfWorkflow = this.workflowService.getById(l);
             WfNode node = this.nodeService.getById(wfWorkflow.getNodeId());
@@ -188,14 +216,14 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
     }
 
     @Override
-    public void rejectToBegin(Long workflowId, String dealOpinion) {
+    public void cancel(Long workflowId, String dealOpinion) {
         List<Long> workflowIds = new ArrayList<>();
         workflowIds.add(workflowId);
-        this.rejectToBegin(workflowIds,dealOpinion);
+        this.cancel(workflowIds,dealOpinion);
     }
 
     @Override
-    public void rejectToBegin(List<Long> workflowIds, String dealOpinion) {
+    public void cancel(List<Long> workflowIds, String dealOpinion) {
         for (Long l:workflowIds){
             WfWorkflow wfWorkflow = this.workflowService.getById(l);
             wfWorkflow.setNodeId(null);
@@ -203,7 +231,7 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
             wfWorkflow.setCurDealRoleId(null);
             wfWorkflow.setPreDealUserId(null);
             wfWorkflow.setCurDealUser(null);
-            wfWorkflow.setState(CommonValue.FLOW_BUILT);
+            wfWorkflow.setState(CommonValue.FLOW_REJECT);
             this.workflowService.updateById(wfWorkflow);
             /**
              * 记录审批记录
@@ -211,4 +239,22 @@ public class FlowDealInterfaceImpl implements IFlowDealInterface{
             flowhistoryService.saveHistory(wfWorkflow,CommonValue.FLOW_NO,dealOpinion);
         }
     }
+
+    @Override
+    public void suspend(Long workflowId, String dealOpinion) {
+        List<Long> workflowIds = new ArrayList<>();
+        workflowIds.add(workflowId);
+        this.suspend(workflowIds,dealOpinion);
+    }
+
+    @Override
+    public void suspend(List<Long> workflowIds, String dealOpinion) {
+        for (Long l:workflowIds){
+            WfWorkflow wfWorkflow = this.workflowService.getById(l);
+            wfWorkflow.setState(CommonValue.FLOW_SUSPEND);
+            this.workflowService.updateById(wfWorkflow);
+        }
+    }
+
+
 }

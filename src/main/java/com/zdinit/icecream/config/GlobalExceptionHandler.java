@@ -3,6 +3,7 @@ package com.zdinit.icecream.config;
 
 import cn.dev33.satoken.exception.NotLoginException;
 import com.zdinit.icecream.common.BaseResponse;
+import com.zdinit.icecream.common.CheckException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -52,6 +53,20 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public BaseResponse<String> NotLoginExceptionhandler(HttpServletRequest req,NotLoginException nle){
         log.info("登录异常",nle);
+        BaseResponse baseResponse = new BaseResponse(BaseResponse.falseCode,nle.getMessage(),null);
+        return baseResponse;
+    }
+
+    /**
+     * 统一的restAPI 参数检测错误返回
+     * @param req
+     * @param nle
+     * @return
+     */
+    @ExceptionHandler(value = CheckException.class)
+    @ResponseBody
+    public BaseResponse<String> CheckExceptionhandler(HttpServletRequest req,NotLoginException nle){
+        log.info("参数检测异常",nle);
         BaseResponse baseResponse = new BaseResponse(BaseResponse.falseCode,nle.getMessage(),null);
         return baseResponse;
     }

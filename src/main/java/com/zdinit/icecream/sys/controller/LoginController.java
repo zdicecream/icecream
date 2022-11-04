@@ -34,7 +34,7 @@ public class LoginController extends BaseController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public BaseResponse login(@RequestBody User userInfo) throws Exception {
+    public BaseResponse login(@RequestBody User userInfo){
 
         User user = userService.judge(userInfo.getUsername(),userInfo.getPassword());
         if (user == null) {
@@ -49,12 +49,12 @@ public class LoginController extends BaseController {
     }
 
     @RequestMapping(value = "/isLogin", method = RequestMethod.POST)
-    public BaseResponse isLogin(@RequestParam String name,@RequestParam String password) throws Exception {
+    public BaseResponse isLogin(){
         return ResponseUtil.sucess("当前会话是否登录：" + StpUtil.isLogin());
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public BaseResponse logout() throws Exception {
+    public BaseResponse logout(){
         StpUtil.logout();
         return ResponseUtil.sucess("已登出");
     }

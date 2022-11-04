@@ -26,12 +26,10 @@ import java.util.stream.Collectors;
 @Service
 public class CdRunstateServiceImpl extends ServiceImpl<CdRunstateMapper, CdRunstate> implements ICdRunstateService {
     @Transactional
-    public void testTran(CdRunstate cdRunstate) throws Exception {
+    public void testTran(CdRunstate cdRunstate){
         this.saveOrUpdate(cdRunstate);
         CdRunstate c = new CdRunstate();
-
         c.setWorkDate(new Date());
-        c.setRsApid("123");
         this.save(c);
     }
 

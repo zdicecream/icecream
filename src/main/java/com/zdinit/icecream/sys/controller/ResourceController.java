@@ -33,7 +33,7 @@ public class ResourceController extends BaseController {
     private IResourceService resourceService;
 
     @RequestMapping(value = "/getAllResourceList", method = RequestMethod.GET)
-    public BaseResponse getAllResourceList() throws Exception {
+    public BaseResponse getAllResourceList(){
         List<Resource> resourceList = this.resourceService.list();
         /**
          * 组装权限列表
@@ -43,7 +43,7 @@ public class ResourceController extends BaseController {
     }
 
     @RequestMapping(value = "/getResourceList", method = RequestMethod.GET)
-    public BaseResponse getResourceList(Resource resource) throws Exception {
+    public BaseResponse getResourceList(Resource resource){
         /**
          * 按条件查询
          */
@@ -59,13 +59,13 @@ public class ResourceController extends BaseController {
         return ResponseUtil.sucess(resourcePage);
     }
     @RequestMapping(value = "/saveResource", method = RequestMethod.POST)
-    public BaseResponse saveResource(@RequestBody Resource resource) throws Exception {
+    public BaseResponse saveResource(@RequestBody Resource resource){
         this.resourceService.saveResource(resource);
         return ResponseUtil.sucess(null);
     }
 
     @RequestMapping(value = "/delResource", method = RequestMethod.POST)
-    public BaseResponse delResource(@RequestParam Long id) throws Exception {
+    public BaseResponse delResource(@RequestParam Long id){
         List<Role> roles = this.resourceService.listRoleByResourceId(id);
         if (roles == null || roles.size()<=0) {
             this.resourceService.removeResourceById(id);

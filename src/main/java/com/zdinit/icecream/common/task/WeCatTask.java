@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
@@ -16,14 +17,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class WeCatTask extends QuartzJobBean {
     @Autowired
-    private ICdRunstateService runstateService;
+    private RedisTemplate redisTemplate;
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-/*        log.info("TaskTest");
-        CdRunstate runstate = runstateService.getOne(null);
-        if (runstate != null && !runstate.getWorkDate().equals(runstate.getRsCurdate())) {
-            runstate.setWorkDate(runstate.getRsCurdate());
-            runstateService.saveOrUpdate(runstate);
-        }*/
+       redisTemplate.opsForValue().set("data","TaskTest",3000l);
+       log.info(redisTemplate.opsForValue().get("data").toString());
     }
 }

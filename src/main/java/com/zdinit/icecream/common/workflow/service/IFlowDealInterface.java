@@ -35,24 +35,24 @@ public interface IFlowDealInterface {
     void submit(List<Long> workflowIds);
 
     /**
-     * 关闭
+     * 撤回提交
      */
-    void close(Long workflowId);
+    void revoke(Long workflowId);
 
     /**
-     * 批量关闭
+     * 批量撤回提交
      */
-    void close(List<Long> workflowIds);
+    void revoke(List<Long> workflowIds);
 
     /**
-     * 删除(仅限未提交状态的流程)
+     * 删除(仅限未提交、驳回状态的流程)
      */
-    void delete(Long workflowId) throws Exception;
+    void delete(Long workflowId);
 
     /**
-     * 批量删除(仅限未提交状态的流程)
+     * 批量删除(仅限未提交、驳回状态的流程)
      */
-    void delete(List<Long> workflowIds) throws Exception;
+    void delete(List<Long> workflowIds);
 
     /**
      * 审批
@@ -65,32 +65,54 @@ public interface IFlowDealInterface {
     void approve(List<Long> workflowIds,String dealOpinion,User dealUser);
 
     /**
-     * 撤回提交
+     * 调整至指定岗
      */
-    void revoke(Long workflowId)throws Exception;
+    void adjust(Long workflowId,Long adjustWorkflowId,String dealOpinion);
 
     /**
-     * 批量撤回提交
+     * 驳回
      */
-    void revoke(List<Long> workflowIds)throws Exception;
+    void reject(Long workflowId,String dealOpinion);
 
     /**
-     * 驳回上一岗
+     * 批量驳回
      */
-    void rejectToPrevious(Long workflowId,String dealOpinion);
+    void reject(List<Long> workflowIds,String dealOpinion);
 
     /**
-     * 批量驳回上一岗
+     * 关闭（跳过流程直接关闭）
      */
-    void rejectToPrevious(List<Long> workflowIds,String dealOpinion);
+    void close(Long workflowId);
 
     /**
-     * 驳回到开始
+     * 批量关闭（跳过流程直接关闭）
      */
-    void rejectToBegin(Long workflowId,String dealOpinion);
+    void close(List<Long> workflowIds);
 
     /**
-     * 批量驳回到开始
+     * 直接改为驳回状态
+     * @param workflowId
      */
-    void rejectToBegin(List<Long> workflowIds,String dealOpinion);
+    void cancel(Long workflowId,String dealOpinion);
+
+    /**
+     * 直接改为驳回状态
+     * @param workflowIds
+     */
+    void cancel(List<Long> workflowIds,String dealOpinion);
+
+    /**
+     * 挂起
+     * @param workflowId
+     * @param dealOpinion
+     */
+    void suspend(Long workflowId,String dealOpinion);
+
+    /**
+     * 挂起
+     * @param workflowIds
+     * @param dealOpinion
+     */
+    void suspend(List<Long> workflowIds,String dealOpinion);
+
 }

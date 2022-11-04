@@ -39,7 +39,7 @@ public class WfWorkflowController {
     private IWfWorkflowService workflowService;
 
     @RequestMapping(value = "/built", method = RequestMethod.POST)
-    public BaseResponse built(@RequestParam Long busId,@RequestParam Long flowId) throws Exception {
+    public BaseResponse built(@RequestParam Long busId,@RequestParam Long flowId) {
         User user = userService.getById(StpUtil.getLoginIdAsLong());
         Group group = groupService.getById(user.getGroupId());
         String num = flowDealInterface.built(user.getId(),user.getUsername(),group.getId(),group.getGroupName(),busId,flowId);
