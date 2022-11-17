@@ -1,14 +1,11 @@
 package com.zdinit.icecream.common.task;
 
-import com.zdinit.icecream.bankinterface.client.NettyClient;
 import com.zdinit.icecream.bankinterface.handle.NettyServer;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import sun.security.krb5.internal.NetClient;
 
 @Component
 @Order(3)
