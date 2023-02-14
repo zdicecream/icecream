@@ -65,7 +65,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = CheckException.class)
     @ResponseBody
-    public BaseResponse<String> CheckExceptionhandler(HttpServletRequest req,NotLoginException nle){
+    public BaseResponse<String> CheckExceptionhandler(HttpServletRequest req,CheckException nle){
         log.info("参数检测异常",nle);
         BaseResponse baseResponse = new BaseResponse(BaseResponse.falseCode,nle.getMessage(),null);
         return baseResponse;
