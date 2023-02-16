@@ -72,7 +72,7 @@ public class TaskRunner implements CommandLineRunner {
     private void scheduleJobs() throws SchedulerException {
         Scheduler scheduler = quartzConfig.scheduler();
         JobDetail jobDetail = JobBuilder.newJob(WeCatTask.class).withIdentity(WECAT_TASK,MSG_GROUP).build();
-        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("5 * * * * ? *");
+        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0/5 * * * * ? *");
         CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(TRIGGER,MSG_GROUP).withSchedule(cronScheduleBuilder).build();
         scheduler.scheduleJob(jobDetail,cronTrigger);
     }

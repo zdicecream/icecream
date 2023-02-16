@@ -5,6 +5,7 @@ import com.zdinit.icecream.common.CommonValue;
 import com.zdinit.icecream.sys.service.IResourceService;
 import com.zdinit.icecream.sys.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,17 +17,29 @@ import java.util.stream.Collectors;
 @Component    // 保证此类被SpringBoot扫描，完成Sa-Token的自定义权限验证扩展
 public class SaTokenPermission implements StpInterface {
     @Autowired
+    private RedisTemplate redisTemplate;
+    @Autowired
     private IResourceService resourceService;
     @Autowired
     private IRoleService roleService;
 
     @Override
-    public List<String> getPermissionList(Object o, String s) {
-        return resourceService.listResourceByUserId(Long.parseLong((String) o)).stream().filter(m->m.getType().equals(CommonValue.MENU)).map(m-> m.getResourceCode()).collect(Collectors.toList());
+    public List<String> getPermissionList(Object loginId, String loginType) {
+        List<String> permissionList = (List<String>) redisTemplate.opsForList().range("Resource:"+loginId,0,-1);
+        if (permissionList == null || permissionList.size() <= 0) {
+            permissionList = resourceService.listResourceByUserId(Long.parseLong((String) loginId)).stream().filter(m->m.getType().equals(CommonValue.MENU)).map(m-> m.getResourceCode()).collect(Collectors.toList());
+            redisTemplate.opsForList().leftPushAll("Resource:"+loginId,permissionList);
+        }
+        return permissionList;
     }
 
     @Override
-    public List<String> getRoleList(Object o, String s) {
-        return roleService.list().stream().map(role -> role.getRoleName()).collect(Collectors.toList());
+    public List<String> getRoleList(Object loginId, String loginType) {
+        List<String> roleList = (List<String>) redisTemplate.opsForList().range("Role:"+loginId,0,-1);
+        if (roleList == null) {
+            roleList = roleService.listRoleByUserId((Long) loginId).stream().map(role -> role.getRoleName()).collect(Collectors.toList());
+            redisTemplate.opsForList().leftPushAll("Role:"+loginId,roleList);
+        }
+        return roleList;
     }
 }

@@ -20,7 +20,7 @@ public class SaTokenInterceptor implements WebMvcConfigurer {
         registry.addInterceptor(new SaRouteInterceptor((req, res, handler) -> {
 
             // 登录验证 -- 拦截所有路由，并排除/sys/login 用于开放登录
-            /*SaRouter.match("/**", "/api/sys/login", () -> StpUtil.checkLogin());*/
+            SaRouter.match("/**", "/sys/login", () -> StpUtil.checkLogin());
 
             // 登录验证 -- 排除多个路径
             /*SaRouter.match(Arrays.asList("/**"), Arrays.asList("/user/doLogin", "/user/reg"), () -> StpUtil.checkLogin());*/
