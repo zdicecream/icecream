@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -30,6 +31,7 @@ public class SaTokenPermission implements StpInterface {
             permissionList = resourceService.listResourceByUserId(Long.parseLong((String) loginId)).stream().filter(m->m.getType().equals(CommonValue.MENU)).map(m-> m.getResourceCode()).collect(Collectors.toList());
             redisTemplate.opsForList().leftPushAll("Resource:"+loginId,permissionList);
         }
+        redisTemplate.expire("Resource:"+loginId,30, TimeUnit.SECONDS);
         return permissionList;
     }
 
@@ -40,6 +42,7 @@ public class SaTokenPermission implements StpInterface {
             roleList = roleService.listRoleByUserId((Long) loginId).stream().map(role -> role.getRoleName()).collect(Collectors.toList());
             redisTemplate.opsForList().leftPushAll("Role:"+loginId,roleList);
         }
+        redisTemplate.expire("Role:"+loginId,30, TimeUnit.SECONDS);
         return roleList;
     }
 }
