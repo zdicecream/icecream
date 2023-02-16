@@ -31,7 +31,7 @@ public class SaTokenPermission implements StpInterface {
             permissionList = resourceService.listResourceByUserId(Long.parseLong((String) loginId)).stream().filter(m->m.getType().equals(CommonValue.MENU)).map(m-> m.getResourceCode()).collect(Collectors.toList());
             redisTemplate.opsForList().leftPushAll("Resource:"+loginId,permissionList);
         }
-        redisTemplate.expire("Resource:"+loginId,30, TimeUnit.SECONDS);
+        redisTemplate.expire("Resource:"+loginId,30 * 60, TimeUnit.SECONDS);
         return permissionList;
     }
 
@@ -42,7 +42,7 @@ public class SaTokenPermission implements StpInterface {
             roleList = roleService.listRoleByUserId((Long) loginId).stream().map(role -> role.getRoleName()).collect(Collectors.toList());
             redisTemplate.opsForList().leftPushAll("Role:"+loginId,roleList);
         }
-        redisTemplate.expire("Role:"+loginId,30, TimeUnit.SECONDS);
+        redisTemplate.expire("Role:"+loginId,30 * 60, TimeUnit.SECONDS);
         return roleList;
     }
 }
