@@ -26,7 +26,7 @@ public class WeCatTask extends QuartzJobBean {
     private StepBuilderFactory stepBuilderFactory;
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-//       redisTemplate.opsForValue().set("data","TaskTest",3000l);
+//       redisTemplate.opsForValue().set("data","TaskTest",3000l, TimeUnit.SECONDS);
 //       log.info(redisTemplate.opsForValue().get("data").toString());
 
 

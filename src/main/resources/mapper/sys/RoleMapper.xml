@@ -24,7 +24,7 @@
     </select>
 
     <select id="listRoleByUserId" resultType="com.zdinit.icecream.sys.entity.Role">
-        select sr.* from sys_role sr left join sys_user_role sur on sur.roleid=sr.id
+        select sr.* from sys_role sr left join sys_user_role sur on sur.role_id=sr.id
         where sur.user_id = #{id}
     </select>
 

@@ -4,14 +4,21 @@ package com.zdinit.icecream.sys.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.zdinit.icecream.common.BaseController;
 import com.zdinit.icecream.common.BaseResponse;
+import com.zdinit.icecream.common.CommonValue;
 import com.zdinit.icecream.common.utils.ResponseUtil;
 import com.zdinit.icecream.sys.entity.User;
 import com.zdinit.icecream.sys.service.IGroupService;
 import com.zdinit.icecream.sys.service.IResourceService;
+import com.zdinit.icecream.sys.service.IRoleService;
 import com.zdinit.icecream.sys.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -31,7 +38,10 @@ public class LoginController extends BaseController {
     private IResourceService resourceService;
     @Autowired
     private IGroupService groupService;
-
+    @Autowired
+    private RedisTemplate redisTemplate;
+    @Autowired
+    private IRoleService roleService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public BaseResponse login(@RequestBody User userInfo){
@@ -44,6 +54,20 @@ public class LoginController extends BaseController {
             return ResponseUtil.error("密码错误");
         }
         StpUtil.login(user.getId());
+
+        //权限
+        List<String> permissionList = resourceService.listResourceByUserId(user.getId()).stream().filter(m->m.getType().equals(CommonValue.MENU)).map(m-> m.getResourceCode()).collect(Collectors.toList());
+        if(!redisTemplate.opsForHash().hasKey(CommonValue.TOKEN_NAME+user.getId(),"resource")){
+            redisTemplate.opsForHash().put(CommonValue.TOKEN_NAME+user.getId(),"resource",permissionList);
+        }
+        redisTemplate.expire(CommonValue.TOKEN_NAME+user.getId(),30 * 60, TimeUnit.SECONDS);
+        //角色
+        List<String> roleList = roleService.listRoleByUserId(user.getId()).stream().map(role -> role.getRoleName()).collect(Collectors.toList());
+        if(!redisTemplate.opsForHash().hasKey(CommonValue.TOKEN_NAME+user.getId(),"role")){
+            redisTemplate.opsForHash().put(CommonValue.TOKEN_NAME+user.getId(),"role",roleList);
+        }
+        redisTemplate.expire(CommonValue.TOKEN_NAME+user.getId(),30 * 60, TimeUnit.SECONDS);
+
         log.info(StpUtil.getTokenValue());
         return ResponseUtil.sucess(StpUtil.getTokenInfo());
     }
@@ -55,6 +79,8 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public BaseResponse logout(){
+        redisTemplate.opsForHash().delete(CommonValue.TOKEN_NAME+StpUtil.getLoginId(),"resource");
+        redisTemplate.opsForHash().delete(CommonValue.TOKEN_NAME+StpUtil.getLoginId(),"role");
         StpUtil.logout();
         return ResponseUtil.sucess("已登出");
     }

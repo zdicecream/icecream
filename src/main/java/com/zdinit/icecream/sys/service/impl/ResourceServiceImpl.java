@@ -208,15 +208,8 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 
     @Override
     public List<Resource> listResourceByUserId(Long id) {
-        if(redisTemplate.hasKey("Resource{"+id+"}")){
-            JSONArray jsonArray = (JSONArray) redisTemplate.opsForValue().get("Resource{"+id+"}");
-            List<Resource> res = jsonArray.toJavaList(Resource.class);
-            return res;
-        }else {
-            List<Resource> res = this.baseMapper.listResourceByUserId(id);
-            redisTemplate.opsForValue().set("Resource{"+id+"}",res,5, TimeUnit.MINUTES);
-            return res;
-        }
+        List<Resource> res = this.baseMapper.listResourceByUserId(id);
+        return res;
     }
 
     private Map<Long, List<Resource>> packMap(List<Resource> list){

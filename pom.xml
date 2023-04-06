@@ -40,12 +40,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!--mybatis-->
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.5.3</version>
-		</dependency>
+<!--		&lt;!&ndash;mybatis&ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.mybatis</groupId>-->
+<!--			<artifactId>mybatis</artifactId>-->
+<!--			<version>3.5.3</version>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -63,17 +63,10 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.ibm.db2.jcc</groupId>
-			<artifactId>db2jcc</artifactId>
-			<version>db2jcc4</version>
-		</dependency>
-
-		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>2.1.214</version>
 		</dependency>
-
 
 		<!-- Druid连接池 -->
 		<dependency>
@@ -172,6 +165,12 @@
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
 			<version>4.1.66.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openjdk.jol</groupId>
+			<artifactId>jol-cli</artifactId>
+			<version>0.17</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>

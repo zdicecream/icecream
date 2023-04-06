@@ -13,9 +13,9 @@ spring:
     druid:
       #2.连接池配置
       #初始化连接池的连接数量 大小，最小，最大
-      initial-size: 5
-      min-idle: 5
-      max-active: 20
+      initial-size: 10
+      min-idle: 10
+      max-active: 10
       #配置获取连接等待超时的时间
       max-wait: 60000
       #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
@@ -83,9 +83,9 @@ mybatis-plus:
   mapper-locations: classpath:/mapper/**/*Mapper.xml
   # pojo包地址，多个使用逗号隔开，不能使用*和classpath
   type-aliases-package: com.zdinit.icecream.sys.vo
-  configuration:
-    #输出格式化sql，但是结果也会输出，过于庞大
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  configuration:
+#    #输出格式化sql，但是结果也会输出，过于庞大
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
 
