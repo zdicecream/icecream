@@ -39,7 +39,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return this.getOne(queryWrapper);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void saveUser(User user) {
         if (null != user.getId()){
@@ -84,7 +84,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void removeUserById(String id) {
         this.baseMapper.deleRoleByUserId(Long.parseLong(id));
         this.removeById(id);

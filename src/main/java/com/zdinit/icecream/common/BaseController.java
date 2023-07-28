@@ -28,13 +28,13 @@ public abstract class BaseController {
         //获取请求参数
         Page page = new Page();
         String pageNoS = request.getParameter("pageNo");
-        Long pageNo = StringUtils.isBlank(pageNoS) ? 1l :Long.parseLong(pageNoS);
+        Long pageNo = StringUtils.isBlank(pageNoS) ? 1L :Long.parseLong(pageNoS);
         String pageSizeS = request.getParameter("pageSize");
         Long pageSize = StringUtils.isBlank(pageSizeS) ? 10L : Long.parseLong(pageSizeS);
         String sortFieldS = request.getParameter("sortField");
         String sortOrderS = request.getParameter("sortOrder");
         if (StringUtils.isNotBlank(sortFieldS)){
-            List<OrderItem> OrderItemList = new ArrayList<>();
+            List<OrderItem> orderItemList = new ArrayList<>();
             String[] sortField = sortFieldS.split(",");
             String[] sortOrder = sortOrderS!=null ? sortOrderS.split(",") : null;
             OrderItem orderItem = null;
@@ -46,9 +46,9 @@ public abstract class BaseController {
                 }else {
                     orderItem.setAsc(false);
                 }
-                OrderItemList.add(orderItem);
+                orderItemList.add(orderItem);
             }
-            page.setOrders(OrderItemList);
+            page.setOrders(orderItemList);
         }
         page.setCurrent(pageNo);
         page.setSize(pageSize);

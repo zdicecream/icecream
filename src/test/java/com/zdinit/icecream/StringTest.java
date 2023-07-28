@@ -8,11 +8,15 @@ import java.util.concurrent.atomic.AtomicLong;
 @Slf4j
 public class StringTest {
     public static void main(String[] args) {
-        StringTest test = new StringTest();
-        test.s4();
-        test.s3();
-        test.s2();
-        test.s1();
+//        StringTest test = new StringTest();
+//        test.s4();
+//        test.s3();
+//        test.s2();
+//        test.s1();
+
+        String a  = " code";
+        System.out.println(a);
+        System.out.println(a.trim());
     }
 
     public void s1(){

@@ -83,9 +83,9 @@ mybatis-plus:
   mapper-locations: classpath:/mapper/**/*Mapper.xml
   # pojo包地址，多个使用逗号隔开，不能使用*和classpath
   type-aliases-package: com.zdinit.icecream.sys.vo
-#  configuration:
+  configuration:
 #    #输出格式化sql，但是结果也会输出，过于庞大
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
 

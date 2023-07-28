@@ -48,7 +48,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         return this.baseMapper.listRoleByUserId(id);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void saveRole(Role role) {
         //全部权限
@@ -95,7 +95,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void removeRoleById(Long id) {
         this.resourceService.delResourceByRoleId(id);
         this.removeById(id);

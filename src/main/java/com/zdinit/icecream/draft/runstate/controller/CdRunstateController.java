@@ -34,7 +34,6 @@ public class CdRunstateController {
     @RequestMapping(value = "/getRunstate", method = RequestMethod.GET)
     public BaseResponse getRunstate(){
         Map<String, String> map = new HashMap<>();
-        //map.put("bankname", redisUtil.get("bankname"));
         return ResponseUtil.sucess(map);
     }
 

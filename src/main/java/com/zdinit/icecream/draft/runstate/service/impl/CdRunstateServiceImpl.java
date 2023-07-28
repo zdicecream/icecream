@@ -25,7 +25,8 @@ import java.util.stream.Collectors;
  */
 @Service
 public class CdRunstateServiceImpl extends ServiceImpl<CdRunstateMapper, CdRunstate> implements ICdRunstateService {
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
+    @Override
     public void testTran(CdRunstate cdRunstate){
         this.saveOrUpdate(cdRunstate);
         CdRunstate c = new CdRunstate();
@@ -41,7 +42,7 @@ public class CdRunstateServiceImpl extends ServiceImpl<CdRunstateMapper, CdRunst
          * 重java
          */
         List<String> stringList = new ArrayList<>();
-        stringList = stringList.stream().filter(s -> s.equals("11")).collect(Collectors.toList());
+        stringList = stringList.stream().filter(s -> "11".equals(s)).collect(Collectors.toList());
 
         /**
          * 重sql

@@ -21,14 +21,14 @@ public class BaseResponse<T> implements Serializable{
      500    内部错误
      */
 
-    public static final Integer successCode = 200;
-    public static final String successMsg = "请求成功！";
+    public static final Integer SUCCESS_CODE = 200;
+    public static final String SUCCESS_MSG = "请求成功！";
 
-    public static final Integer falseCode = 400;
-    public static final String falseMsg = "无效请求！";
+    public static final Integer FALSE_CODE = 400;
+    public static final String FALSE_MSG = "无效请求！";
 
-    public static final Integer errorCode = 500;
-    public static final String errorMsg = "内部错误！";
+    public static final Integer ERROR_CODE = 500;
+    public static final String ERROR_MSG = "内部错误！";
 
     private Integer code;
     private String msg;

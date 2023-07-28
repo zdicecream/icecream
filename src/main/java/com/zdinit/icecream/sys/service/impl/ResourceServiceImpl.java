@@ -117,7 +117,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void saveResource(Resource resource) {
         if (null != resource.getId()){
             UpdateWrapper<Resource> updateWrapper = new UpdateWrapper<>();
@@ -198,7 +198,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void removeResourceById(Long id) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("pid",id);

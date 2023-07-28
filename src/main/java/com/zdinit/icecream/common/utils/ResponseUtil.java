@@ -5,8 +5,8 @@ import com.zdinit.icecream.common.BaseResponse;
 public class ResponseUtil {
     public static BaseResponse sucess(Object object){
         BaseResponse baseResponse= new BaseResponse();
-        baseResponse.setCode(BaseResponse.successCode);
-        baseResponse.setMsg(BaseResponse.successMsg);
+        baseResponse.setCode(BaseResponse.SUCCESS_CODE);
+        baseResponse.setMsg(BaseResponse.SUCCESS_MSG);
         baseResponse.setData(object);
         return baseResponse;
     }
@@ -23,10 +23,10 @@ public class ResponseUtil {
     }
 
     public static BaseResponse error(){
-        return error(BaseResponse.errorCode,BaseResponse.errorMsg);
+        return error(BaseResponse.ERROR_CODE,BaseResponse.ERROR_MSG);
     }
 
     public static BaseResponse error(String msg){
-        return error(BaseResponse.errorCode,msg);
+        return error(BaseResponse.ERROR_CODE,msg);
     }
 }

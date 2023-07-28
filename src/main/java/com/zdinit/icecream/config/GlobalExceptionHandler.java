@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public BaseResponse<String> defaultErrorHandler(HttpServletRequest req, Exception e){
         log.info("系统错误",e);
-        BaseResponse baseResponse = new BaseResponse(BaseResponse.errorCode,BaseResponse.errorMsg+"["+e.getMessage()+"]",null);
+        BaseResponse baseResponse = new BaseResponse(BaseResponse.ERROR_CODE,BaseResponse.ERROR_MSG +"["+e.getMessage()+"]",null);
         return baseResponse;
     }
 
@@ -51,9 +51,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = NotLoginException.class)
     @ResponseBody
-    public BaseResponse<String> NotLoginExceptionhandler(HttpServletRequest req,NotLoginException nle){
+    public BaseResponse<String> notLoginExceptionhandler(HttpServletRequest req,NotLoginException nle){
         log.info("登录异常",nle);
-        BaseResponse baseResponse = new BaseResponse(BaseResponse.falseCode,nle.getMessage(),null);
+        BaseResponse baseResponse = new BaseResponse(BaseResponse.FALSE_CODE,nle.getMessage(),null);
         return baseResponse;
     }
 
@@ -65,9 +65,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = CheckException.class)
     @ResponseBody
-    public BaseResponse<String> CheckExceptionhandler(HttpServletRequest req,CheckException nle){
+    public BaseResponse<String> checkExceptionhandler(HttpServletRequest req,CheckException nle){
         log.info("参数检测异常",nle);
-        BaseResponse baseResponse = new BaseResponse(BaseResponse.falseCode,nle.getMessage(),null);
+        BaseResponse baseResponse = new BaseResponse(BaseResponse.FALSE_CODE,nle.getMessage(),null);
         return baseResponse;
     }
 

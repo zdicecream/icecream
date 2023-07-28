@@ -21,7 +21,7 @@ public class MsgFactory {
             default:
         }
         msg.setMsgCode(msgCode);
-        msg.setId(112131312l);
+        msg.setId(112131312L);
         msg.setCreateTime(LocalDateTime.now());
         msg.setMsgId("1231313123");
         msg.setState(1);
