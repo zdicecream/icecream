@@ -3,7 +3,7 @@ package com.zdinit.icecream.config;
 
 import cn.dev33.satoken.exception.NotLoginException;
 import com.zdinit.icecream.common.BaseResponse;
-import com.zdinit.icecream.common.CheckException;
+import com.zdinit.icecream.common.exception.CheckException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,16 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
-//    非restAPI 类型的指向
-//    public static final String DEFAULT_ERROR_VIEW ="error";
-//    @ExceptionHandler(value = Exception.class)
-//    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e){
-//        ModelAndView mav = new ModelAndView();
-//        mav.addObject("exception", e);
-//        mav.addObject("url", req.getRequestURL());
-//        mav.setViewName(DEFAULT_ERROR_VIEW);
-//        return mav;
-//    }
 
     /**
      * 统一的restAPI 500返回

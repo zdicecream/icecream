@@ -69,5 +69,9 @@ public class CommonValue {
      * redis 前缀
      */
     public static final String TOKEN_NAME_PART3 = "authority";
+    /**
+     * redis 前缀
+     */
+    public static final String SYSTEM = "SYSTEM";
 
 }

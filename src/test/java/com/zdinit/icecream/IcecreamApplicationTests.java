@@ -1,12 +1,12 @@
 package com.zdinit.icecream;
 
 import com.alibaba.fastjson.JSON;
-import com.zdinit.icecream.msg.entity.AbstractMsg;
-import com.zdinit.icecream.msg.entity.Msg001;
-import com.zdinit.icecream.msg.service.MsgCommonValue;
-import com.zdinit.icecream.msg.service.MsgFactory;
-import com.zdinit.icecream.msg.service.MsgHandles;
-import com.zdinit.icecream.msg.service.MsgSendManager;
+import com.zdinit.icecream.business.msg.entity.AbstractMsg;
+import com.zdinit.icecream.business.msg.entity.Msg001;
+import com.zdinit.icecream.business.msg.service.MsgCommonValue;
+import com.zdinit.icecream.business.msg.service.MsgFactory;
+import com.zdinit.icecream.business.msg.service.MsgHandles;
+import com.zdinit.icecream.business.msg.service.MsgSendManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

@@ -2,6 +2,8 @@
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
     <contextName>logback</contextName>
 
+    <!-- 定义日志的根目录, 绝对路径 -->
+    <property name="LOG_HOME" value="c://"/>
     <!--控制台输出内容的颜色转换以及格式-->
     <substitutionProperty name="logging.pattern.console"
                           value="%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
@@ -32,7 +34,7 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--相对路径，生成的文件就在项目根目录下-->
             <FileNamePattern>
-                logs/%d{yyyy-MM}/%d{yyyy-MM-dd}.log
+                ${LOG_HOME}/logs/%d{yyyy-MM}/%d{yyyy-MM-dd}.log
             </FileNamePattern>
             <!--注意超过365天的日志文件会被删除，即使已经按天分开也会删除-->
             <MaxHistory>365</MaxHistory>

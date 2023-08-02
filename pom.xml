@@ -167,10 +167,17 @@
 			<version>4.1.66.Final</version>
 		</dependency>
 
+		<!--用于查看中文源码 -->
 		<dependency>
 			<groupId>org.openjdk.jol</groupId>
 			<artifactId>jol-cli</artifactId>
 			<version>0.17</version>
+		</dependency>
+
+		<!-- @Aspect 自定义注解aop支持 -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>

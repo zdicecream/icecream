@@ -12,43 +12,31 @@
 
 
 
-
-
 >**文件目录**
-  
+
 project  
-　　|--common 通用       
-　　　　|--base           
-　　　　　　|--base（response controller constant(常量) enums(枚举) exception）     
-　　　　　　|--config    
-　　　　　　　　|--序列化(fastJson、jackson**)    
-　　　　　　　　|--日志框架（logback）     
-　　　　　　　　|--全局异常  
-　　　　　　　　|--swagger2 接口文档           
-　　　　　　|--util（excel，httpClient，responseUtil，hutool（暂定））  
-　　　　|--db  
-　　　　　　|--config  
-　　　　　　　　|--mybatis  
-　　　　　　　　|--mybatis-plus  
-　　　　　　　　|--连接池Config (springboot默认HiKariCP或Druid)  
-　　　　　　　　|--idGenerator id生成器（待定）  
-　　　　　　　　|--codeGenerator 代码生成器  
-　　　　|--entity Vo通用实体  
-　　　　|--feign 服务调用  
-　　　　|--redis  
-　　　　　　|--config   
-　　　　　　　　|--redis    
-　　|--gateway 网关   
-　　　　|--config (权限认证，登录异常处理)  
-　　|--dispatch（Quartz或者xxl-job）调度(和springBatch批量任务合并)  
+　　|--common 通用                
+　　　 |--base（response controller constant(常量) enums(枚举) exception）  
+　　　 |--util（excel，httpClient，responseUtil，hutool（暂定））  
+　　　 |--workflow（框架 or 自己写）    
+　　|--config    
+　　　 |--序列化(fastJson、jackson**)        
+　　　 |--日志框架（logback）         
+　　　 |--全局异常       
+　　　 |--swagger2 接口文档               
+　　　 |--mybatis        
+　　　 |--mybatis-plus    
+　　　 |--连接池Config (springboot默认HiKariCP或Druid)  
+　　　 |--codeGenerator 代码生成器   
+　　　 |--redis   
+　　　 |--kafka   
+　　　 |--权限认证（sa-token）    
 　　|--auth 权限  
-　　　　|--config (登录后做权限登记)  
-　　　　|--auth  
-　　　　　　|--controller  
-　　　　　　|--entity  
-　　　　　　|--service  
-　　　　　　|--mapper  
-　　|--monitor 系统监控 springbootAdmin  
+　　　 |--controller  
+　　　 |--entity  
+　　　 |--service  
+　　　 |--mapper      
+　　|--dispatch（Quartz或者xxl-job）调度(和springBatch批量任务合并)  
 　　|--business 业务模块  
 　　　　|--系统管理  
 　　　　　　|--字典  
@@ -82,4 +70,4 @@ project
 　　　　　　|--工作流引擎  
 　　　　　　|--工作流业务模块  
 　　|--search 搜索  
-　　|--项目文档
+

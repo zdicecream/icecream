@@ -1,14 +1,12 @@
 package com.zdinit.icecream.common.workflow.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.zdinit.icecream.common.CheckException;
+import com.zdinit.icecream.common.exception.CheckException;
 import com.zdinit.icecream.common.CommonValue;
-import com.zdinit.icecream.common.workflow.entity.WfFlowhistory;
 import com.zdinit.icecream.common.workflow.entity.WfNode;
 import com.zdinit.icecream.common.workflow.entity.WfWorkflow;
 import com.zdinit.icecream.common.workflow.service.*;
-import com.zdinit.icecream.sys.entity.User;
-import com.zdinit.icecream.sys.service.IUserService;
+import com.zdinit.icecream.auth.entity.User;
+import com.zdinit.icecream.auth.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

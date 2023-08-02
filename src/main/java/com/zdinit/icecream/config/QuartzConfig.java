@@ -1,8 +1,7 @@
 package com.zdinit.icecream.config;
 
 
-import com.zdinit.icecream.common.task.WeCatTask;
-import org.quartz.*;
+import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ApplicationContext;

@@ -1,9 +1,9 @@
 package com.zdinit.icecream.config;
 
 import cn.dev33.satoken.stp.StpInterface;
+import com.zdinit.icecream.auth.service.IResourceService;
+import com.zdinit.icecream.auth.service.IRoleService;
 import com.zdinit.icecream.common.CommonValue;
-import com.zdinit.icecream.sys.service.IResourceService;
-import com.zdinit.icecream.sys.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;

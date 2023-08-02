@@ -1,7 +1,7 @@
 package com.zdinit.icecream.common.workflow.service;
 
 import com.zdinit.icecream.common.workflow.entity.WfWorkflow;
-import com.zdinit.icecream.sys.entity.User;
+import com.zdinit.icecream.auth.entity.User;
 
 import java.util.List;
 
