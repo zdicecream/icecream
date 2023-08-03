@@ -1,6 +1,5 @@
 package com.zdinit.icecream;
 
-import com.alibaba.fastjson.JSON;
 import com.zdinit.icecream.business.msg.entity.AbstractMsg;
 import com.zdinit.icecream.business.msg.entity.Msg001;
 import com.zdinit.icecream.business.msg.service.MsgCommonValue;
@@ -19,10 +18,10 @@ class IcecreamApplicationTests {
 		msg1.setNb("1212");
 		MsgSendManager.send(msg1);
 
-		String msgText = "cim001~{\"createTime\":\"2021-07-30T17:31:10.002\",\"msgId\":\"1231313123\",\"id\":112131312,\"state\":1,\"msgCode\":\"cim001\",\"originalMsgId\":\"3332\"}";
+		String msgText = "cim001~{\"createTime\":\"2021-07-30 12:12:13\",\"msgId\":\"1231313123\",\"id\":112131312,\"state\":1,\"msgCode\":\"cim001\",\"originalMsgId\":\"3332\"}";
 		String[] msgString = msgText.split(MsgCommonValue.MSGSPLIT);
 		String msgCode = msgString[0];
-		JSON json = (JSON) JSON.parse(msgString[1]);
+		String json = msgString[1];
 
 		AbstractMsg msg = MsgFactory.convert(msgCode,json);
 

@@ -6,7 +6,7 @@ import com.zdinit.icecream.auth.service.IRunstateService;
 import com.zdinit.icecream.common.BaseController;
 import com.zdinit.icecream.common.BaseResponse;
 import com.zdinit.icecream.common.CommonValue;
-//import com.zdinit.icecream.common.aop.ClearRedis;
+import com.zdinit.icecream.common.aop.ClearRedis;
 import com.zdinit.icecream.common.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,8 +50,10 @@ public class RunstateController extends BaseController{
         String state = (String) redisTemplate.opsForHash().get(CommonValue.SYSTEM,"sysState");
         if (state == null || date == null) {
             Runstate runstate = runstateService.getOne(null);
-            date = runstate.getSysdate().toString();
+            date = runstate.getSysdate().format(DateTimeFormatter.ISO_DATE);
             state = runstate.getSysstate();
+            redisTemplate.opsForHash().put(CommonValue.SYSTEM,"sysDate",date);
+            redisTemplate.opsForHash().put(CommonValue.SYSTEM,"sysState",state);
         }
         Map map = new HashMap();
         map.put("sysDate",date);
@@ -65,12 +68,12 @@ public class RunstateController extends BaseController{
      * @throws Exception
      */
     @RequestMapping(value = "/updateRunstate", method = RequestMethod.POST)
-//    @ClearRedis(name = CommonValue.SYSTEM)
+    @ClearRedis(name = CommonValue.SYSTEM)
     public BaseResponse updateRunstate(@RequestBody Runstate runstate){
         Runstate curRunstate = runstateService.getOne(null);
         curRunstate.setSysdate(runstate.getSysdate());
         curRunstate.setSysstate(runstate.getSysstate());
-        runstateService.save(runstate);
+        runstateService.saveOrUpdate(curRunstate);
         return ResponseUtil.sucess();
     }
 

@@ -10,7 +10,7 @@ public class MsgSendManager {
 
         StringBuffer msgJson = new StringBuffer();
         msgJson.append(msg.getMsgCode()+MsgCommonValue.MSGSPLIT);
-        msgJson.append(JSON.toJSON(msg));
+        msgJson.append(JSON.toJSONStringWithDateFormat(msg,"yyyy-MM-dd hh:mm:dd"));
 
 
         log.info("发送:"+msgJson.toString());

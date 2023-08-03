@@ -11,10 +11,12 @@ import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.time.format.DateTimeFormatter;
+
 @Component
 @Order(2)
 @Slf4j
-public class sysRunner implements CommandLineRunner {
+public class SysRunner implements CommandLineRunner {
     @Autowired
     private RedisTemplate redisTemplate;
     @Autowired
@@ -27,7 +29,7 @@ public class sysRunner implements CommandLineRunner {
         if (runstate == null) {
             throw new RunstateNotFoundException("系统状态数据缺失！");
         }
-        redisTemplate.opsForHash().put(CommonValue.SYSTEM,"sysDate",runstate.getSysdate());
+        redisTemplate.opsForHash().put(CommonValue.SYSTEM,"sysDate",runstate.getSysdate().format(DateTimeFormatter.ISO_DATE));
         redisTemplate.opsForHash().put(CommonValue.SYSTEM,"sysState",runstate.getSysstate());
     }
 }

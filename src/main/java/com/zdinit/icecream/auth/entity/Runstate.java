@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -25,7 +25,7 @@ public class Runstate extends Model<Runstate> {
 
     private Long id;
 
-    private Date sysdate;
+    private LocalDateTime sysdate;
 
     private String sysstate;
 

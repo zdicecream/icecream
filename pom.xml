@@ -21,12 +21,32 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<spring-boot.version>2.3.0.RELEASE</spring-boot.version>
 		<java.version>1.8</java.version>
+		<mybatis-plus-boot>3.3.2</mybatis-plus-boot>
+		<swagger2.version>2.9.2</swagger2.version>
+		<sa-token.version>1.20.0</sa-token.version>
+		<h2.version>2.1.214</h2.version>
+
+		<netty-all.version>4.1.63.Final</netty-all.version>
+		<gson.version>2.9.0</gson.version>
+		<groovy.version>3.0.10</groovy.version>
 	</properties>
 
 	<dependencies>
+		<!--在web中排除Tomcat-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!--使用undertow依赖-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 
 		<dependency>
@@ -40,12 +60,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-<!--		&lt;!&ndash;mybatis&ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>org.mybatis</groupId>-->
-<!--			<artifactId>mybatis</artifactId>-->
-<!--			<version>3.5.3</version>-->
-<!--		</dependency>-->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -54,7 +74,7 @@
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-boot-starter</artifactId>
-			<version>3.3.2</version>
+			<version>${mybatis-plus-boot}</version>
 		</dependency>
 		<!--DB-->
 		<dependency>
@@ -65,7 +85,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>2.1.214</version>
+			<version>${h2.version}</version>
 		</dependency>
 
 		<!-- Druid连接池 -->
@@ -86,7 +106,7 @@
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-generator</artifactId>
-			<version>3.3.2</version>
+			<version>${mybatis-plus-boot}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.freemarker</groupId>
@@ -104,27 +124,27 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
-			<version>2.9.2</version>
+			<version>${swagger2.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.9.2</version>
+			<version>${swagger2.version}</version>
 		</dependency>
 
 		<!--定时调度任务-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-quartz</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-quartz</artifactId>-->
+<!--		</dependency>-->
 
 		<!--批处理-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-batch</artifactId>
-			<version>2.7.5</version>
-			<type>pom</type>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-batch</artifactId>-->
+<!--			<version>2.7.5</version>-->
+<!--			<type>pom</type>-->
+<!--		</dependency>-->
 
         <!--reids支持-->
         <dependency>
@@ -152,13 +172,13 @@
 		<dependency>
 			<groupId>cn.dev33</groupId>
 			<artifactId>sa-token-spring-boot-starter</artifactId>
-			<version>1.20.0</version>
+			<version>${sa-token.version}</version>
 		</dependency>
 		<!-- Sa-Token整合redis (使用jackson序列化方式) -->
 		<dependency>
 			<groupId>cn.dev33</groupId>
 			<artifactId>sa-token-dao-redis-jackson</artifactId>
-			<version>1.21.0</version>
+			<version>${sa-token.version}</version>
 		</dependency>
 		<!-- Netty -->
 		<dependency>
@@ -174,11 +194,6 @@
 			<version>0.17</version>
 		</dependency>
 
-		<!-- @Aspect 自定义注解aop支持 -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>

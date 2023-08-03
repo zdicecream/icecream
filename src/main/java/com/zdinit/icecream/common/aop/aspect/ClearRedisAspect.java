@@ -38,7 +38,7 @@ public class ClearRedisAspect {
         String name = annotation.name();//获取自定义注解的方法对象的参数即name
 
         //删除缓存
-        redisTemplate.opsForHash().delete(name);
+        redisTemplate.delete(name);
         log.info("第一次删除{}！",name);
 
         //执行加入双删注解的改动数据库的业务 即controller中的方法业务
@@ -58,7 +58,7 @@ public class ClearRedisAspect {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                redisTemplate.opsForHash().delete(name);
+                redisTemplate.delete(name);
                 log.info("异步删除{}！",name);
             }
         });
