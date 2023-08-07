@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_group")
-public class Group extends Model<Group> {
+public class Group {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,11 +31,5 @@ public class Group extends Model<Group> {
     private Long pid;
 
     private Integer state;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
 
 }

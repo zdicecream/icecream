@@ -21,7 +21,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_user")
-public class User extends Model<User>{
+public class User{
 
     private static final long serialVersionUID = 1L;
 
@@ -52,9 +52,6 @@ public class User extends Model<User>{
 
     @TableField(exist = false)
     private List resourceList;
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
+
 
 }

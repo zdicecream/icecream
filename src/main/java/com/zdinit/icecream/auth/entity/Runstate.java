@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -19,19 +20,14 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_runstate")
-public class Runstate extends Model<Runstate> {
+public class Runstate{
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
-    private LocalDateTime sysdate;
+    private LocalDate sysdate;
 
     private String sysstate;
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
 
 }

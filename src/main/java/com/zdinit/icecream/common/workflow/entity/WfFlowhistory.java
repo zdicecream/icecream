@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class WfFlowhistory extends Model<WfFlowhistory> {
+public class WfFlowhistory {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,11 +33,4 @@ public class WfFlowhistory extends Model<WfFlowhistory> {
     private String dealResult;
 
     private String dealOpinion;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
 }

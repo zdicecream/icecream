@@ -20,7 +20,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_resource")
-public class Resource extends Model<Resource> implements Serializable{
+public class Resource implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -46,10 +46,4 @@ public class Resource extends Model<Resource> implements Serializable{
 
     @TableField(exist = false)
     private List<Resource> children;
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
 }

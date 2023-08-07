@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class WfNode extends Model<WfNode> {
+public class WfNode {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,11 +32,5 @@ public class WfNode extends Model<WfNode> {
     private Long previousNodeId;
 
     private Long nextNodeId;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
 
 }

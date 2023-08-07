@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,7 +67,7 @@ public class RunstateController extends BaseController{
      * @throws Exception
      */
     @RequestMapping(value = "/updateRunstate", method = RequestMethod.POST)
-    @ClearRedis(name = CommonValue.SYSTEM)
+    @ClearRedis
     public BaseResponse updateRunstate(@RequestBody Runstate runstate){
         Runstate curRunstate = runstateService.getOne(null);
         curRunstate.setSysdate(runstate.getSysdate());

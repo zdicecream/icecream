@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class WfWorkflow extends Model<WfWorkflow> {
+public class WfWorkflow {
 
     private static final long serialVersionUID = 1L;
 
@@ -51,11 +51,5 @@ public class WfWorkflow extends Model<WfWorkflow> {
     private Long busId;
 
     private Long preDealUserId;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
 
 }

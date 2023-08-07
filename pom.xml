@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-<!--	<parent>-->
-<!--		<groupId>org.springframework.boot</groupId>-->
-<!--		<artifactId>spring-boot-starter-parent</artifactId>-->
-<!--		<version>2.3.0.RELEASE</version>-->
-<!--		<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
-<!--	</parent>-->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.0.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
 	<groupId>com.zdinit</groupId>
 	<artifactId>icecream</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -15,20 +15,18 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<javax.servlet.jstl>1.0</javax.servlet.jstl>
-		<taglibs.standard>1.1.1</taglibs.standard>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<spring-boot.version>2.3.0.RELEASE</spring-boot.version>
 		<java.version>1.8</java.version>
-		<mybatis-plus-boot>3.3.2</mybatis-plus-boot>
+		<mybatis-plus-boot>3.5.3.1</mybatis-plus-boot>
 		<swagger2.version>2.9.2</swagger2.version>
 		<sa-token.version>1.20.0</sa-token.version>
 		<h2.version>2.1.214</h2.version>
+		<druid.version>1.1.22</druid.version>
 
 		<netty-all.version>4.1.63.Final</netty-all.version>
-		<gson.version>2.9.0</gson.version>
-		<groovy.version>3.0.10</groovy.version>
+<!--		<gson.version>2.9.0</gson.version>-->
+<!--		<groovy.version>3.0.10</groovy.version>-->
 	</properties>
 
 	<dependencies>
@@ -71,17 +69,21 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-boot-starter</artifactId>
 			<version>${mybatis-plus-boot}</version>
 		</dependency>
-		<!--DB-->
+
+		<!--mybatis plus CodeGenerator-->
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-generator</artifactId>
+			<version>${mybatis-plus-boot}</version>
 		</dependency>
 
+		<!--DB-->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -92,7 +94,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid-spring-boot-starter</artifactId>
-			<version>1.1.22</version>
+			<version>${druid.version}</version>
 		</dependency>
 
 		<!-- 数据库版本控制工具flyway-->
@@ -101,18 +103,12 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
-
-		<!--mybatis plus CodeGenerator-->
-		<dependency>
-			<groupId>com.baomidou</groupId>
-			<artifactId>mybatis-plus-generator</artifactId>
-			<version>${mybatis-plus-boot}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.freemarker</groupId>
-			<artifactId>freemarker</artifactId>
-			<version>2.3.30</version>
-		</dependency>
+<!--		-->
+<!--		<dependency>-->
+<!--			<groupId>org.freemarker</groupId>-->
+<!--			<artifactId>freemarker</artifactId>-->
+<!--			<version>2.3.30</version>-->
+<!--		</dependency>-->
 		<!--fastJson__alibaba-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -151,10 +147,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-pool2</artifactId>
-			<version>2.6.2</version>
 		</dependency>
 
 		<dependency>
@@ -187,13 +183,12 @@
 			<version>4.1.66.Final</version>
 		</dependency>
 
-		<!--用于查看中文源码 -->
+		<!--用于查看中文源码  查看类 ClassLayout-->
 		<dependency>
 			<groupId>org.openjdk.jol</groupId>
 			<artifactId>jol-cli</artifactId>
 			<version>0.17</version>
 		</dependency>
-
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>

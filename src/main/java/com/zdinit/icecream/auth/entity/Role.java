@@ -20,7 +20,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_role")
-public class Role extends Model<Role> {
+public class Role{
 
     private static final long serialVersionUID = 1L;
 
@@ -32,10 +32,4 @@ public class Role extends Model<Role> {
 
     @TableField(exist = false)
     private List resourceList;
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
 }
