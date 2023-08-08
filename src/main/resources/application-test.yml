@@ -1,8 +1,37 @@
 # DataSource Config
 spring:
-  datasource:
-    driver-class-name: org.h2.Driver
-    #serverTimezone=Asia/Shanghai  ****很重要，使用UTC时时间保存会少一天
-    url: jdbc:h2:tcp://localhost/~/test
-    username: root
-    password: root
+  shardingsphere:
+    datasource:
+      names: ds0,ds1
+      ds0:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/test2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT
+        username: test
+        password: 123456
+        type: com.alibaba.druid.pool.DruidDataSource
+      ds1:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT
+        username: test
+        password: 123456
+        type: com.alibaba.druid.pool.DruidDataSource
+    sharding:
+      tables:
+        SYS_USER:
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: ds$->{id % 2}
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+      broadcastTables: SYS_RUNSTATE
+      default-data-source-name: ds1
+      # 配置默认分库策略
+      defaultDatabaseStrategy:
+        inline:
+          shardingColumn: id
+          algorithmExpression: ds$->{id % 2}
+    props:
+      sql:
+        show: true

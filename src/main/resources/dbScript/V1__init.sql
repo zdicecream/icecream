@@ -16,7 +16,13 @@
 -- 授权用户
 #grant all on test.* to 'test'@'localhost' IDENTIFIED BY  '123456';
 
+GRANT SELECT,INSERT,UPDATE,DELETE ON test.* TO 'test'@'localhost';
 
+GRANT all ON test.* TO 'test'@'localhost';
+
+grant all privileges on test.* to admin;
+
+flush privileges;
 -- 建表语句事例
 
 create table sys_user(

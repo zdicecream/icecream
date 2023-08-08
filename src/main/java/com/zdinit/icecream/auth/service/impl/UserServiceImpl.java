@@ -78,7 +78,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             userAdd.setCreateTime(LocalDateTime.now());
             this.save(userAdd);
 
-            user.getRoleList().forEach(roleid -> this.baseMapper.saveRole(userAdd.getId(),Long.parseLong((String) roleid)));
+//            user.getRoleList().forEach(roleid -> this.baseMapper.saveRole(userAdd.getId(),Long.parseLong((String) roleid)));
         }
     }
 

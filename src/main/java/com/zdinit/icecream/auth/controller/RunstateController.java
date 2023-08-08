@@ -67,7 +67,7 @@ public class RunstateController extends BaseController{
      * @throws Exception
      */
     @RequestMapping(value = "/updateRunstate", method = RequestMethod.POST)
-    @ClearRedis
+    @ClearRedis(name = CommonValue.SYSTEM)
     public BaseResponse updateRunstate(@RequestBody Runstate runstate){
         Runstate curRunstate = runstateService.getOne(null);
         curRunstate.setSysdate(runstate.getSysdate());
