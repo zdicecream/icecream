@@ -14,4 +14,6 @@ import com.zdinit.icecream.auth.entity.Runstate;
  */
 public interface IRunstateService extends IService<Runstate> {
 
+    void testSave(Runstate runstate);
+
 }

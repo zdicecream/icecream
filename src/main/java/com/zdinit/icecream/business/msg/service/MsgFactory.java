@@ -14,6 +14,9 @@ import java.time.LocalDateTime;
 public class MsgFactory {
 
     public static AbstractMsg createMsg(String msgCode) {
+        if (msgCode == null) {
+            throw new RuntimeException("msgCode is null");
+        }
         AbstractMsg msg = null;
         switch (msgCode){
             case MsgCommonValue.MSG001 :
@@ -33,7 +36,7 @@ public class MsgFactory {
     }
 
     public static AbstractMsg convert(String msgCode,String json){
-          //fasejson 用法
+          //fastjson 用法
         ClassLoader classLoader = MsgFactory.class.getClassLoader();
         Class<AbstractMsg> c = null;
         try {

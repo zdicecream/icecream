@@ -16,9 +16,11 @@
 
 project  
 　　|--common 通用                
-　　　 |--base（response controller constant(常量) enums(枚举) exception）  
+　　　 |--base（response controller constant(常量) enums(枚举)）  
 　　　 |--util（excel，httpClient，responseUtil，hutool（暂定））  
-　　　 |--workflow（框架 or 自己写）    
+　　　 |--workflow（可以使用框架，然后自己改造）    
+　　　 |--exception    
+　　　 |--aop    
 　　|--config    
 　　　 |--序列化(fastJson、jackson**)        
 　　　 |--日志框架（logback）         
